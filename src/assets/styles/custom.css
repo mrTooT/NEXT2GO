@@ -1,0 +1,8 @@
+.answered-questions {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.answered-questions .question {
+    width: 4rem;
+}

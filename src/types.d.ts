@@ -1,6 +1,26 @@
 import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 import type { HTMLAttributes, ImageMetadata } from 'astro/types';
 
+export interface Quiz {
+  questions: Question[];
+}
+
+export interface Question {
+  id: number;
+  question: string;
+  description: string;
+  image?: string;
+  answers: Answer[];
+  selectedAnswerId?: string;
+}
+
+export interface Answer {
+  id: string;
+  answer: string;
+  image?: string;
+  description?: string;
+}
+
 export interface Post {
   /** A unique ID number that identifies a post. */
   id: string;

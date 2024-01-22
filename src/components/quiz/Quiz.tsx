@@ -1,0 +1,112 @@
+import React, { useState, useEffect } from 'react';
+import type { Quiz, Question, Answer } from './types/quiz.type';
+import RAnswer from '~/components/quiz/Answer.tsx';
+
+export interface Props{
+  title?: string;
+  linkText?: string;
+  linkUrl?: string | URL;
+  information?: string;
+  count?: number;
+  quiz: Quiz;
+}
+
+
+
+const quizId = 'vacation-quiz';
+
+
+const RQuiz = (props: Props) => {
+  const findActiveQuestion = (activeQuestionId) => props.quiz.questions.find(question => question.id === activeQuestionId)
+
+    const [answeredQuestions, setAnsweredQuestions] = useState<Question[]>([]);
+    const [activeQuestion, setActiveQuestion] = useState<Question[]>(findActiveQuestion(1));
+
+    const RenderAnsweredQuestions = () => {
+      if (!answeredQuestions.length) return;
+
+      return (
+        <div className="answered-questions">
+          {answeredQuestions.map((question: Question) => 
+          <div className="answered-questions question cursor-pointer" key={question.id} onClick={() =>  setActiveQuestion(findActiveQuestion(question.id))}>
+              <img
+                src={question.selectedAnswer.image}
+                className="w-full md:h-full rounded-full shadow-lg"
+                width={400}
+                sizes="(max-width: 900px) 400px, 900px"
+                alt={question.selectedAnswer.question}
+                loading="lazy"
+                decoding="async"
+              />
+              <h3 className="mb-2 text-xl font-bold leading-tight sm:text-2xl font-heading">
+                {question.selectedAnswer.question}  
+              </h3>
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    const RenderActiveQuestions = () => {
+      return activeQuestion ? (
+        <>
+          <div className="flex flex-col lg:justify-between lg:flex-row mb-8">
+              {activeQuestion.question && (
+              <div className="md:max-w-sm">
+                  <h2 className="text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">{activeQuestion.question}</h2>
+              </div>
+              )}
+
+              {activeQuestion.description && <p className="text-muted dark:text-slate-400 lg:text-sm lg:max-w-md">{activeQuestion.description}</p>}
+          </div>
+          <div className="grid gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-4 -mb-6">
+              {activeQuestion.answers.map((answer) => 
+                <div className="mb-6 transition cursor-pointer" key={answer.id} onClick={() => onAnswerClick(activeQuestion, answer)}>
+                  <RAnswer key={answer.id} answer={answer}></RAnswer>
+                </div>
+              )}
+        
+          </div>  
+        </>
+      ) : (
+          <>You are done with this amazing quiz, woohooooooo</>
+      ) 
+    }
+
+    const onAnswerClick = (clickedQuestion: Question, clickedAnswer: Answer) => {
+      clickedQuestion.selectedAnswer = clickedAnswer;
+
+      // Check if the state already contains an item with the same id
+      const existingAnswerIndex = answeredQuestions.findIndex(answer => answer.id === clickedQuestion.id);
+
+      if (existingAnswerIndex !== -1) {
+        // If the id already exists, update the existing item
+        const updatedAnsweredQuestions = [...answeredQuestions];
+        updatedAnsweredQuestions[existingAnswerIndex] = clickedQuestion;
+        setAnsweredQuestions(updatedAnsweredQuestions);
+      } else {
+        // If the id doesn't exist, add the clickedAnswer to the state array
+        setAnsweredQuestions(prevAnswers => [...prevAnswers, clickedQuestion]);
+      }
+
+      setActiveQuestion(findActiveQuestion(activeQuestion.id + 1));
+
+    }
+
+    useEffect(() => {
+      console.log('answered questions in effect:', answeredQuestions);
+    }, [answeredQuestions])
+    
+
+    // const [saving, setSaving] = useState(false)
+    return (
+    <div id={quizId} className="relative px-4 md:px-6 py-12 md:py-16 lg:py-20 text-default mx-auto max-w-6xl">
+            { <RenderAnsweredQuestions />}
+            { <RenderActiveQuestions />}
+    </div>
+    )
+
+}
+
+export default RQuiz;
+

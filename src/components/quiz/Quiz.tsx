@@ -39,7 +39,7 @@ const RQuiz = (props: Props) => {
                 decoding="async"
               />
               <h3 className="mb-2 text-xl font-bold leading-tight sm:text-2xl font-heading">
-                {question.selectedAnswer.question}  
+                {question.selectedAnswer.answer}  
               </h3>
             </div>
           )}
@@ -50,18 +50,18 @@ const RQuiz = (props: Props) => {
     const RenderActiveQuestions = () => {
       return activeQuestion ? (
         <>
-          <div className="flex flex-col lg:justify-between lg:flex-row mb-8">
+          <div className="flex items-center lg:justify-between mb-8">
               {activeQuestion.question && (
               <div className="md:max-w-sm">
-                  <h2 className="text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">{activeQuestion.question}</h2>
+                  <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">{activeQuestion.question}</h2>
               </div>
               )}
 
-              {activeQuestion.description && <p className="text-muted dark:text-slate-400 lg:text-sm lg:max-w-md">{activeQuestion.description}</p>}
+              {activeQuestion.description && <h3 className="text-muted sm:text-m dark:text-slate-400 lg:text-2xl lg:max-w-md">{activeQuestion.description}</h3>}
           </div>
           <div className="grid gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-4 -mb-6">
               {activeQuestion.answers.map((answer) => 
-                <div className="mb-6 transition cursor-pointer" key={answer.id} onClick={() => onAnswerClick(activeQuestion, answer)}>
+                <div className="mb-6 transition cursor-pointer answer-container" key={answer.id} onClick={() => onAnswerClick(activeQuestion, answer)}>
                   <RAnswer key={answer.id} answer={answer}></RAnswer>
                 </div>
               )}

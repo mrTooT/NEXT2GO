@@ -1,8 +1,31 @@
 .answered-questions {
     display: flex;
     flex-direction: row-reverse;
+    gap: 2rem;
 }
 
 .answered-questions .question {
-    width: 4rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.answered-questions .question img{
+    height: 10rem;
+    width: 10rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.answer-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.answer-image {
+    height: 14rem;
+    width: 14rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }

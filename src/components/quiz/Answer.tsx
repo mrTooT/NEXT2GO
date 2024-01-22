@@ -9,13 +9,12 @@ interface Props {
 const RAnswer = (props: Props) => {
     return (
         <>
-          <div className="relative md:h-64 rounded-full shadow-lg mb-6">
+          <div className="relative md:h-64 rounded-full mb-6">
           {
               props.answer.image && (
                   <img
                   src={props.answer.image}
-                  className="w-full md:h-full rounded-full shadow-lg"
-                  width={400}
+                  className="answer-image w-full md:h-full shadow-lg rounded-full"
                   sizes="(max-width: 900px) 400px, 900px"
                   alt={props.answer.answer}
                   loading="lazy"

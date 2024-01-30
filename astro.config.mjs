@@ -22,7 +22,7 @@ export default defineConfig({
   site: SITE.site,
   base: SITE.base,
   trailingSlash: SITE.trailingSlash ? 'always' : 'never',
-  output: 'hybrid',
+  output: 'static',
   integrations: [
     sanity({
       projectId: "5eo5uf46",

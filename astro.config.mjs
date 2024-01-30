@@ -15,7 +15,7 @@ const whenExternalScripts = (items = []) => ANALYTICS.vendors.googleAnalytics.id
 
 // Loading environment variables from .env files
 // https://docs.astro.build/en/guides/configuring-astro/#environment-variables
-import sanityIntegration from "@sanity/astro";
+import { sanityIntegration as sanity } from "@sanity/astro"
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,9 +24,9 @@ export default defineConfig({
   trailingSlash: SITE.trailingSlash ? 'always' : 'never',
   output: 'hybrid',
   integrations: [
-    sanityIntegration({
+    sanity({
       projectId: "5eo5uf46",
-      data: "production",
+      dataset: "production",
       studioBasePath: "/admin",
       useCdn: false,
     }),

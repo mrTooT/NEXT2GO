@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import type { Quiz, Question, Answer } from './types/quiz.type';
 import RAnswer from '~/components/quiz/Answer.tsx';
+import { client } from '~/client';
+import imageUrlBuilder from "@sanity/image-url";
 
 export interface Props{
   title?: string;
@@ -11,16 +13,39 @@ export interface Props{
   quiz: Quiz;
 }
 
-
-
 const quizId = 'vacation-quiz';
+const builder = imageUrlBuilder(client);
+
+const urlFor = (source) => {
+	return builder.image(source);
+}
 
 
 const RQuiz = (props: Props) => {
-  const findActiveQuestion = (activeQuestionId) => props.quiz.questions.find(question => question.id === activeQuestionId)
+  const [questions, setQuestions] = useState<Question[] >([]);
+  const [answeredQuestions, setAnsweredQuestions] = useState<Question[]>([]);
+  
+  useEffect(() => {
+		client
+			.fetch(
+				`*[_type == "question"]{
+      id,
+      question,
+      description,
+      answers,
+    }`
+			)
+			.then((data) => {
+        console.log('data: ', data);
+        setQuestions(data);
+      })
+			.catch(console.error);
+	}, []);
 
-    const [answeredQuestions, setAnsweredQuestions] = useState<Question[]>([]);
-    const [activeQuestion, setActiveQuestion] = useState<Question[]>(findActiveQuestion(1));
+  const findActiveQuestion: Question | undefined = (activeQuestionId) => {
+    return questions.find(question => question.id === activeQuestionId)
+  }
+  const [activeQuestion, setActiveQuestion] = useState<Question>();
 
     const RenderAnsweredQuestions = () => {
       if (!answeredQuestions.length) return;
@@ -28,13 +53,13 @@ const RQuiz = (props: Props) => {
       return (
         <div className="answered-questions">
           {answeredQuestions.map((question: Question) => 
-          <div className="answered-questions question cursor-pointer" key={question.id} onClick={() =>  setActiveQuestion(findActiveQuestion(question.id))}>
+            question.selectedAnswer && <div className="answered-questions question cursor-pointer" key={question.id} onClick={() =>  setActiveQuestion(findActiveQuestion(question.id))}>
               <img
-                src={question.selectedAnswer.image}
+                src={urlFor(question.selectedAnswer.image).url()}
                 className="w-full md:h-full rounded-full shadow-lg"
                 width={400}
                 sizes="(max-width: 900px) 400px, 900px"
-                alt={question.selectedAnswer.question}
+                alt={question.selectedAnswer.answer}
                 loading="lazy"
                 decoding="async"
               />
@@ -94,8 +119,8 @@ const RQuiz = (props: Props) => {
     }
 
     useEffect(() => {
-      console.log('answered questions in effect:', answeredQuestions);
-    }, [answeredQuestions])
+      setActiveQuestion(findActiveQuestion(1))
+    }, [questions])
     
 
     // const [saving, setSaving] = useState(false)

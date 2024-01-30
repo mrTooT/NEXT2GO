@@ -13,13 +13,24 @@ import react from "@astrojs/react";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const whenExternalScripts = (items = []) => ANALYTICS.vendors.googleAnalytics.id && ANALYTICS.vendors.googleAnalytics.partytown ? Array.isArray(items) ? items.map(item => item()) : [items()] : [];
 
+// Loading environment variables from .env files
+// https://docs.astro.build/en/guides/configuring-astro/#environment-variables
+import sanityIntegration from "@sanity/astro";
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE.site,
   base: SITE.base,
   trailingSlash: SITE.trailingSlash ? 'always' : 'never',
-  output: 'static',
-  integrations: [tailwind({
+  output: 'hybrid',
+  integrations: [
+    sanityIntegration({
+      projectId: "5eo5uf46",
+      data: "production",
+      studioBasePath: "/admin",
+      useCdn: false,
+    }),
+    tailwind({
     applyBaseStyles: false
   }), sitemap(), mdx(), icon({
     include: {

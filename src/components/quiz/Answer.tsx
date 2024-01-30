@@ -1,5 +1,7 @@
 import React, { useMemo, useRef, useState } from 'react';
 import type { Answer } from '~/types';
+import { client } from '~/client';
+import imageUrlBuilder from "@sanity/image-url";
 
 
 interface Props {
@@ -7,13 +9,20 @@ interface Props {
 }
 
 const RAnswer = (props: Props) => {
+
+const builder = imageUrlBuilder(client);
+
+const urlFor = (source) => {
+	return builder.image(source);
+}
+
     return (
         <>
           <div className="relative md:h-64 rounded-full mb-6">
           {
               props.answer.image && (
                   <img
-                  src={props.answer.image}
+                  src={urlFor(props.answer.image).url()}
                   className="answer-image w-full md:h-full shadow-lg rounded-full"
                   sizes="(max-width: 900px) 400px, 900px"
                   alt={props.answer.answer}

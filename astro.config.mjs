@@ -15,22 +15,22 @@ const whenExternalScripts = (items = []) => ANALYTICS.vendors.googleAnalytics.id
 
 // Loading environment variables from .env files
 // https://docs.astro.build/en/guides/configuring-astro/#environment-variables
-import { sanityIntegration as sanity } from "@sanity/astro"
+import { sanityIntegration as sanity } from "@sanity/astro";
+
+import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE.site,
   base: SITE.base,
   trailingSlash: SITE.trailingSlash ? 'always' : 'never',
-  output: 'static',
-  integrations: [
-    sanity({
-      projectId: "5eo5uf46",
-      dataset: "production",
-      studioBasePath: "/admin",
-      useCdn: false,
-    }),
-    tailwind({
+  output: 'hybrid',
+  integrations: [sanity({
+    projectId: "5eo5uf46",
+    dataset: "production",
+    studioBasePath: "/admin",
+    useCdn: false
+  }), tailwind({
     applyBaseStyles: false
   }), sitemap(), mdx(), icon({
     include: {
@@ -55,5 +55,6 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src')
       }
     }
-  }
+  },
+  adapter: netlify()
 });

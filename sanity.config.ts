@@ -1,5 +1,5 @@
 import { defineConfig } from "sanity";
-import { schemaTypes } from './next2go/schamas'
+import { schemaTypes } from './next2go/schemas'
 
 export default defineConfig({
   name: "next2go",

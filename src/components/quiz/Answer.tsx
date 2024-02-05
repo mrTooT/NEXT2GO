@@ -22,7 +22,7 @@ const urlFor = (source) => {
           {
               props.answer.image && (
                   <img
-                  src={urlFor(props.answer.image).url()}
+                  src={urlFor(props.answer.image).width(450).url()}
                   className="answer-image w-full md:h-full shadow-lg rounded-full"
                   sizes="(max-width: 900px) 400px, 900px"
                   alt={props.answer.answer}

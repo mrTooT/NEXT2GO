@@ -55,7 +55,7 @@ const RQuiz = (props: Props) => {
           {answeredQuestions.map((question: Question) => 
             question.selectedAnswer && <div className="answered-questions question cursor-pointer" key={question.id} onClick={() =>  setActiveQuestion(findActiveQuestion(question.id))}>
               <img
-                src={urlFor(question.selectedAnswer.image).url()}
+                src={urlFor(question.selectedAnswer.image).width(450).url()}
                 className="w-full md:h-full rounded-full shadow-lg"
                 width={400}
                 sizes="(max-width: 900px) 400px, 900px"

@@ -12,8 +12,6 @@
 }
 
 .answered-questions .question img{
-    height: 10rem;
-    width: 10rem;
     aspect-ratio: 1 / 1;
     object-fit: cover;
 }

@@ -18,7 +18,7 @@ const urlFor = (source) => {
 
     return (
         <>
-          <div className="relative md:h-64 rounded-full mb-6">
+          <div className="relative md:h-40 rounded-full mb-6 image-container">
           {
               props.answer.image && (
                   <img
@@ -36,7 +36,7 @@ const urlFor = (source) => {
           {props.answer.answer}  
           </h3>
       
-          <p className="text-xl text-muted mb-6 dark:text-slate-300">{props.answer.description}</p>
+          <p className="text-xl text-muted mb-6 dark:text-slate-300 answer-text">{props.answer.description}</p>
         </>
     )
 }

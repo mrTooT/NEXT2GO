@@ -64,10 +64,19 @@ const RQuiz = (props: Props) => {
 			.catch(console.error);
 	}, []);
 
+
   const findActiveQuestion: Question | undefined = (activeQuestionId) => {
     return questions.find(question => question.id === activeQuestionId)
   }
   const [activeQuestion, setActiveQuestion] = useState<Question>();
+
+  const scrollIntoView = () => {
+    if (activeQuestion && activeQuestionsRef?.current) {
+      activeQuestionsRef?.current.scrollIntoView()
+    } else if (!activeQuestion && answeredQuestionsRef?.current) {
+      answeredQuestionsRef?.current.scrollIntoView()
+    } 
+  }
 
     const RenderAnsweredQuestions = () => {
       if (!answeredQuestions.length) return;
@@ -139,9 +148,7 @@ const RQuiz = (props: Props) => {
       
       setAnimateIndex(clickedAnswer.id)
       setActiveQuestion(findActiveQuestion(activeQuestion.id + 1));
-      activeQuestionsRef?.current.scrollIntoView() 
-
-
+      scrollIntoView();
     }
 
     useEffect(() => {

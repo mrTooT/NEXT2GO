@@ -97,7 +97,7 @@ const RQuiz = (props: Props) => {
     const RenderActiveQuestions = () => {
         return activeQuestion ? (
           <>
-          <div ref={activeQuestionsRef} className="flex items-center justify-between mb-8 flex-col md:flex-row">
+          <div ref={activeQuestionsRef} className="flex md:items-center justify-between mb-8 flex-col md:flex-row">
               {activeQuestion.question && (
               <div className="md:max-w-sm">
                   <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">{activeQuestion.question}</h2>

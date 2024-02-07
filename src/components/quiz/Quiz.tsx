@@ -97,7 +97,7 @@ const RQuiz = (props: Props) => {
     const RenderActiveQuestions = () => {
         return activeQuestion ? (
           <>
-          <div ref={activeQuestionsRef} className="flex items-center justify-between mb-8">
+          <div ref={activeQuestionsRef} className="flex items-center justify-between mb-8 flex-col md:flex-row">
               {activeQuestion.question && (
               <div className="md:max-w-sm">
                   <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">{activeQuestion.question}</h2>
@@ -108,7 +108,7 @@ const RQuiz = (props: Props) => {
           </div>
           <div className="grid lg:gap-6 lg:row-gap-5 grid-cols-2 lg:grid-cols-4 -mb-6">
               {activeQuestion.answers.map((answer, index) => 
-                <div className={'lg:mb-6 transition cursor-pointer p-6 pt-12 pb-12 answer-' + index} key={answer.id} onClick={() => onAnswerClick(activeQuestion, answer)}>
+                <div className={'lg:mb-6 transition cursor-pointer p-6 md:pt-12 md:pb-12 answer-' + index} key={answer.id} onClick={() => onAnswerClick(activeQuestion, answer)}>
                   <RAnswer key={answer.id} answer={answer}></RAnswer>
                 </div>
               )}

@@ -3,6 +3,7 @@ import type { Quiz, Question, Answer } from './types/quiz.type';
 import RAnswer from '~/components/quiz/Answer.tsx';
 import { client } from '~/client';
 import imageUrlBuilder from "@sanity/image-url";
+import { PortableText } from '@portabletext/react';
 
 export interface Props{
   title?: string;
@@ -13,6 +14,11 @@ export interface Props{
   quiz: Quiz;
 }
 
+export interface Content{
+  quizFinishedTitle?: string;
+  quizFinishedText?: any;
+}
+
 const quizId = 'vacation-quiz';
 const builder = imageUrlBuilder(client);
 
@@ -20,10 +26,11 @@ const urlFor = (source) => {
 	return builder.image(source);
 }
 
-
 const RQuiz = (props: Props) => {
   const [questions, setQuestions] = useState<Question[] >([]);
+  const [content, setContent] = useState<Content>();
   const [answeredQuestions, setAnsweredQuestions] = useState<Question[]>([]);
+  const [animateIndex, setAnimateIndex] = useState<number | null>(null);
   const activeQuestionsRef = React.createRef();
   const answeredQuestionsRef = React.createRef();
   
@@ -38,8 +45,21 @@ const RQuiz = (props: Props) => {
     }`
 			)
 			.then((data) => {
-        console.log('data: ', data);
+        console.log('Questions data: ', data);
         setQuestions(data);
+      })
+			.catch(console.error);
+
+      client
+			.fetch(
+				`*[_type == "home"]{
+      quizFinishedTitle,
+      quizFinishedText,
+    }`
+			)
+			.then((data) => {
+        console.log('Homepage data: ', data[0]);
+        setContent(data[0]);
       })
 			.catch(console.error);
 	}, []);
@@ -75,9 +95,7 @@ const RQuiz = (props: Props) => {
     }
 
     const RenderActiveQuestions = () => {
-
-      if (activeQuestion) {
-        return (
+        return activeQuestion ? (
           <>
           <div ref={activeQuestionsRef} className="flex items-center justify-between mb-8">
               {activeQuestion.question && (
@@ -96,20 +114,11 @@ const RQuiz = (props: Props) => {
               )}
         
           </div>  
-        </>
-        )
-      } else {
-        answeredQuestionsRef?.current?.scrollIntoView() 
-        return (
-          <div>
-            <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">We have your 
-            <span className="text-accent dark:text-white highlight"> Next2Go 
-            </span> preferences</h2>
-            <div>Would you like us to send you some recommendations?</div>
-          </div>
-
-        )
-      }
+        </>) :
+        (<div>
+          <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">{content?.quizFinishedTitle}</h2>
+          {content?.quizFinishedText && <PortableText value={content?.quizFinishedText} />}
+        </div>)
     }
 
     const onAnswerClick = (clickedQuestion: Question, clickedAnswer: Answer) => {
@@ -127,7 +136,8 @@ const RQuiz = (props: Props) => {
         // If the id doesn't exist, add the clickedAnswer to the state array
         setAnsweredQuestions(prevAnswers => [...prevAnswers, clickedQuestion]);
       }
-
+      
+      setAnimateIndex(clickedAnswer.id)
       setActiveQuestion(findActiveQuestion(activeQuestion.id + 1));
       activeQuestionsRef?.current.scrollIntoView() 
 

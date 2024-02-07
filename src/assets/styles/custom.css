@@ -45,11 +45,26 @@
 }
 
 .answer-image {
-    height: 10rem;
-    width: 10rem;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    /* position: absolute;
+    margin-top: 0px;
+    margin-left: 0; */
 }
+
+.animate-image .answer-image {
+    animation: slide-in 0.7s both;
+  }
+  
+  @keyframes slide-in {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-300px);
+    }
+  }
+  
 
 .answer-text {
     height: 5rem;

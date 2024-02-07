@@ -54,6 +54,23 @@ export default defineType({
       type: 'array',
       of: [{type: 'answer'}],
     }),
+    defineField({
+      name: 'quizFinishedTitle',
+      title: 'Quiz Finished Title',
+      type: 'string',
+      description: 'Dit is de titel die de gebruiker te zien krijgt wanneer hij klaar is met de quiz',
+    }),
+    defineField({
+      name: 'quizFinishedText',
+      title: 'Quiz Finished Text',
+      description:'Dit is de tekst die de gebruiker te zien krijgt wanneer hij klaar is met de quiz',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+      }
+      ]
+    }),
   ],
   preview: {
     select: {

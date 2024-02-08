@@ -124,7 +124,7 @@ const RQuiz = (props: Props) => {
         
           </div>  
         </>) :
-        (<div>
+        (<div className="mt-4">
           <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">{content?.quizFinishedTitle}</h2>
           {content?.quizFinishedText && <PortableText value={content?.quizFinishedText} />}
         </div>)

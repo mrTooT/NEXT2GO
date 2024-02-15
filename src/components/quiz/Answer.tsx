@@ -32,11 +32,11 @@ const urlFor = (source) => {
               )
           }
           </div>
-          <h3 className="mb-2 text-l font-bold leading-tight sm:text-xl font-heading">
+          <h3 className="text-center mb-2 text-l font-bold leading-tight sm:text-xl font-heading">
           {props.answer.answer}  
           </h3>
       
-          <p className="text-m text-muted dark:text-slate-300 answer-text hidden md:block">{props.answer.description}</p>
+          <p className="text-center text-m text-muted dark:text-slate-300 answer-text hidden md:block">{props.answer.description}</p>
         </>
     )
 }

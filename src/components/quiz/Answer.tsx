@@ -23,7 +23,7 @@ const urlFor = (source) => {
               props.answer.image && (
                   <img
                   src={urlFor(props.answer.image).width(450).url()}
-                  className="answer-image md:h-full shadow-lg rounded-full animate-image w-32 h-32 md:w-40 md:h-40"
+                  className="answer-image md:h-full shadow-lg rounded-full animate-image w-32 h-32 md:w-36 md:h-36"
                   sizes="(max-width: 500px) 400px, 500px"
                   alt={props.answer.answer}
                   loading="lazy"
@@ -32,11 +32,11 @@ const urlFor = (source) => {
               )
           }
           </div>
-          <h3 className="mb-2 text-xl font-bold leading-tight sm:text-2xl font-heading">
+          <h3 className="mb-2 text-l font-bold leading-tight sm:text-xl font-heading">
           {props.answer.answer}  
           </h3>
       
-          <p className="text-xl text-muted mb-6 dark:text-slate-300 answer-text hidden md:block">{props.answer.description}</p>
+          <p className="text-m text-muted dark:text-slate-300 answer-text hidden md:block">{props.answer.description}</p>
         </>
     )
 }

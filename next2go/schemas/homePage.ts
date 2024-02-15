@@ -34,6 +34,12 @@ export default defineType({
       description: 'Text onder zwarte subtitle',
     }),
     defineField({
+      name: 'tagline',
+      title: 'Tagline text below button',
+      type: 'string',
+      description: 'Text onder button',
+    }),
+    defineField({
       name: 'buttonText',
       title: 'Button text',
       type: 'string',

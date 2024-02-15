@@ -37,7 +37,7 @@ const {
     </div>
     {
       image && (
-        <div class="relative md:basis-1/2">
+        <div class="hidden md:block relative md:basis-1/2">
           {(typeof image === 'string' ? (
           <Fragment set:html={image} />
           ) : (

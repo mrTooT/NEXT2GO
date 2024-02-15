@@ -15,6 +15,7 @@ interface HomepageData {
   teaser?: string;
   buttonText?: string;
   image?: any;
+  tagline?: any;
 
 }
 
@@ -46,11 +47,14 @@ homePageData.map(d => data = d)
     <Fragment set:html={data.teaser} slot="subtitle">
       
     </Fragment>
+
+    <Fragment set:html={data.tagline} slot="content"></Fragment>
   </Hero>
 
+
   <Steps
-    title="A guided journey from plans to creativity"
-    tagline="simplified process"
+    title="The journey to your next destination"
+    tagline="NEXT2GO process"
     isReversed={true}
     items={[
       {
@@ -71,7 +75,7 @@ homePageData.map(d => data = d)
       }
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1536816579748-4ecb3f03d72a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      src: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=3348&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       alt: 'Steps image',
     }}
   />
@@ -81,12 +85,13 @@ homePageData.map(d => data = d)
   </div>
 
   <Testimonials
+   id="testimonials"
     title="What people say about us"
     testimonials={[
       {
         testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
+        name: 'Mick Noya',
+        job: 'Reisspecialist',
         image: {
           src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
           alt: 'Emily Kennedy Image',
@@ -94,8 +99,8 @@ homePageData.map(d => data = d)
       },
       {
         testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
+        name: 'Rik Toetenel',
+        job: 'Levensgenieter',
         image: {
           src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
           alt: 'Sarah Hansen Image',
@@ -103,8 +108,8 @@ homePageData.map(d => data = d)
       },
       {
         testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Mark Wilkinson',
-        job: 'Small business owner',
+        name: 'Sven Vrolijk',
+        job: 'Dooie mus',
         image: {
           src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
           alt: 'Mark Wilkinson Image',

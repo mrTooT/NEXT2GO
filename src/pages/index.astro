@@ -5,9 +5,8 @@ import Hero from '~/components/widgets/Hero.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import RQuiz from '~/components/quiz/Quiz.tsx';
 import {quizData} from '~/utils/quiz';
-import { client } from '~/client';
 import { sanityClient } from "sanity:client";
-import imageUrlBuilder from "@sanity/image-url";
+import Steps from '~/components/widgets/Steps.astro';
 
 
 interface HomepageData {
@@ -29,12 +28,6 @@ let data: HomepageData = null;
 
 homePageData.map(d => data = d)
 
-const builder = imageUrlBuilder(sanityClient)
-const image = data.image && builder
-  .image(data.image)
-  .width(2000)
-  .fit('max')
-  .auto('format')
 ---
 
 <Layout metadata={metadata}>
@@ -44,7 +37,6 @@ const image = data.image && builder
     actions={[
       { text: data.buttonText, href: '#quiz' },
     ]}
-    image={{ src: image.url(), alt: 'Your personal travel planner' }}
   >
     <Fragment slot="title">
       <span set:html={data.title} class="text-accent dark:text-white highlight"></span><br>
@@ -52,15 +44,44 @@ const image = data.image && builder
     </Fragment>
 
     <Fragment set:html={data.teaser} slot="subtitle">
+      
     </Fragment>
   </Hero>
+
+  <Steps
+    title="A guided journey from plans to creativity"
+    tagline="simplified process"
+    isReversed={true}
+    items={[
+      {
+        title: 'Quiz',
+        icon: 'tabler:number-1',
+      },
+      {
+        title: 'Curated advice',
+        icon: 'tabler:number-2',
+      },
+      {
+        title: '1 on 1 contact',
+        icon: 'tabler:number-3',
+      },
+      {
+        title: 'Book',
+        icon: 'tabler:number-4',
+      }
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1536816579748-4ecb3f03d72a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Steps image',
+    }}
+  />
 
   <div id="quiz" class="mb-8 border-t border-gray-200 dark:border-slate-800">
     <RQuiz client:load quiz={quizData}></RQuiz>
   </div>
 
   <Testimonials
-    title="Words from real customers"
+    title="What people say about us"
     testimonials={[
       {
         testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,

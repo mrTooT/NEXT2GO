@@ -8,6 +8,7 @@ import { findLatestPosts } from "~/utils/blog";
 import WidgetWrapper from "~/components/ui/WidgetWrapper.astro";
 import type { Widget } from "~/types";
 import Button from "../ui/Button.astro";
+import { sanityClient } from "sanity:client";
 
 export interface Props extends Widget {
   title?: string;
@@ -31,6 +32,11 @@ const {
 } = Astro.props;
 
 const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
+
+const blogData = await sanityClient.fetch(`*[_type == "blog"]`);
+
+console.log('blogData: ', blogData)
+console.log('posts: ', posts)
 ---
 
 {
@@ -52,7 +58,7 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
         {information && <p class="text-muted dark:text-slate-400 lg:text-sm lg:max-w-md" set:html={information} />}
       </div>
 
-      <Grid posts={posts} />
+      <Grid posts={blogData} />
     </WidgetWrapper>
   ) : (
     <Fragment />

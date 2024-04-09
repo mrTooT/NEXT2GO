@@ -7,6 +7,8 @@ import RQuiz from '~/components/quiz/Quiz.tsx';
 import {quizData} from '~/utils/quiz';
 import { sanityClient } from "sanity:client";
 import Steps from '~/components/widgets/Steps.astro';
+import BlogLatestPosts from '../components/widgets/BlogLatestPosts.astro';
+import { CollapseMenu } from 'sanity';
 
 
 interface HomepageData {
@@ -16,6 +18,8 @@ interface HomepageData {
   buttonText?: string;
   image?: any;
   tagline?: any;
+  testimonial?: any;
+  blogs?: any;
 
 }
 
@@ -25,7 +29,7 @@ const metadata = {
 };
 
 const homePageData = await sanityClient.fetch(`*[_type == "home"]`);
-let data: HomepageData = null;
+let data: HomepageData | null = null;
 
 homePageData.map(d => data = d)
 
@@ -87,6 +91,18 @@ homePageData.map(d => data = d)
   <Testimonials
    id="testimonials"
     title="What people say about us"
+    testimonials={data.testimonial}
+    callToAction={{
+      target: '_blank',
+      text: 'More testimonials...',
+      href: 'https://github.com/onwidget/astrowind',
+      icon: 'tabler:chevron-right',
+    }}
+  />
+
+  <!-- <Testimonials
+   id="testimonials"
+    title="What people say about us"
     testimonials={[
       {
         testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
@@ -122,5 +138,13 @@ homePageData.map(d => data = d)
       href: 'https://github.com/onwidget/astrowind',
       icon: 'tabler:chevron-right',
     }}
+  /> -->
+
+  <!-- HighlightedPosts Widget ******* -->
+
+  <BlogLatestPosts
+    title="Hier een pakkende titel voor de/het blog"
+    information={`Hier een mega interessante introductie tekst voor de/het blog
+                `}
   />
 </Layout>

@@ -74,8 +74,19 @@ export default defineType({
       of: [
         {
           type: 'block',
-      }
-      ]
+      }]
+    }),
+    defineField({
+      name: 'blogs',
+      title: 'Blogs',
+      type: 'array',
+      of: [{type: 'blog'}],
+    }),
+    defineField({
+      name: 'testimonial',
+      title: 'Testimonials',
+      type: 'array',
+      of: [{type: 'testimonial'}],
     }),
   ],
   preview: {

@@ -4,6 +4,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import RQuiz from '~/components/quiz/Quiz.tsx';
+import Features from '~/components/widgets/Features.astro';
 import {quizData} from '~/utils/quiz';
 import { sanityClient } from "sanity:client";
 import Steps from '~/components/widgets/Steps.astro';
@@ -56,33 +57,30 @@ homePageData.map(d => data = d)
   </Hero>
 
 
-  <Steps
-    title="The journey to your next destination"
-    tagline="NEXT2GO process"
-    isReversed={true}
-    items={[
-      {
-        title: 'Quiz',
-        icon: 'tabler:number-1',
-      },
-      {
-        title: 'Curated advice',
-        icon: 'tabler:number-2',
-      },
-      {
-        title: '1 on 1 contact',
-        icon: 'tabler:number-3',
-      },
-      {
-        title: 'Book',
-        icon: 'tabler:number-4',
-      }
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=3348&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      alt: 'Steps image',
-    }}
-  />
+  <Features
+  id="features"
+  tagline="NEXT2GO process"
+  title="The journey to your next destination"
+  columns={4}
+  items={[
+    {
+      title: 'Quiz',
+      icon: 'tabler:number-1',
+    },
+    {
+      title: 'Curated advice',
+      icon: 'tabler:number-2',
+    },
+    {
+      title: '1 on 1 contact',
+      icon: 'tabler:number-3',
+    },
+    {
+      title: 'Book',
+      icon: 'tabler:number-4',
+    },
+  ]}
+/>
 
   <div id="quiz" class="mb-8 border-t border-gray-200 dark:border-slate-800">
     <RQuiz client:load quiz={quizData}></RQuiz>

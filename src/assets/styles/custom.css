@@ -88,7 +88,7 @@
     justify-content: center;
 }
 
-/* .close-icon {
+.close-icon {
     position: absolute;
     right: 32px;
     top: 32px;
@@ -99,11 +99,19 @@
   .close-icon:hover {
     opacity: 1;
   }
-  .close-icon:before {
+  .close-icon:before, .close-icon:after {
     position: absolute;
     left: 15px;
-    content:  "\00d7";
+    content:  " ";
     height: 33px;
     width: 2px;
     background-color: #333;
-  } */
+    cursor: pointer;
+  }
+
+  .close-icon:before {
+    transform: rotate(45deg);
+  }
+  .close-icon:after {
+    transform: rotate(-45deg);
+  }

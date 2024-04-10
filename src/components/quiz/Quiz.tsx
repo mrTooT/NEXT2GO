@@ -69,6 +69,7 @@ const RQuiz = (props: Props) => {
     return questions.find(question => question.id === activeQuestionId)
   }
   const [activeQuestion, setActiveQuestion] = useState<Question>();
+  const [activeQuiz, setActiveQuiz] = useState(false);
 
   const scrollIntoView = () => {
     if (activeQuestion && activeQuestionsRef?.current) {
@@ -82,7 +83,7 @@ const RQuiz = (props: Props) => {
       if (!answeredQuestions.length) return;
 
       return (
-        <div className="answered-questions" ref={answeredQuestionsRef}>
+        <div className={"answered-questions " + (!activeQuestion? 'finished' : '')} ref={answeredQuestionsRef}>
           {answeredQuestions.map((question: Question) => 
             question.selectedAnswer && <div className="answered-questions question cursor-pointer" key={question.id} onClick={() =>  setActiveQuestion(findActiveQuestion(question.id))}>
               <img
@@ -124,13 +125,15 @@ const RQuiz = (props: Props) => {
         
           </div>  
         </>) :
-        (<div className="mt-4">
-          <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">{content?.quizFinishedTitle}</h2>
+        (<div className="mt-4 mb-8 md:mx-auto md:mb-12 text-center max-w-3xl">
+          <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2 md:mx-auto md:mb-2 text-center max-w-3xl">{content?.quizFinishedTitle}</h2>
           {content?.quizFinishedText && <PortableText value={content?.quizFinishedText} />}
+          {props.children}
         </div>)
     }
 
     const onAnswerClick = (clickedQuestion: Question, clickedAnswer: Answer) => {
+      setActiveQuiz(true)
       clickedQuestion.selectedAnswer = clickedAnswer;
 
       // Check if the state already contains an item with the same id
@@ -158,10 +161,28 @@ const RQuiz = (props: Props) => {
 
     // const [saving, setSaving] = useState(false)
     return (
-    <div id={quizId} ref={activeQuestionsRef} className="relative px-4 md:px-6 py-12 md:py-16 lg:py-20 text-default mx-auto max-w-6xl">
-            { <RenderAnsweredQuestions />}
-            { <RenderActiveQuestions />}
-    </div>
+      <div className={`${activeQuiz ? 'active' : ''}`}>
+        {activeQuiz && 
+        <span className="close-icon" onClick={() => setActiveQuiz(false)}>Close</span>}
+        <div id={quizId} ref={activeQuestionsRef} className={'relative px-4 md:px-6 py-12 md:py-16 lg:py-20 text-default mx-auto max-w-6xl'}>
+          <div className="text-center pb-4 md:pb-6 max-w-5xl mx-auto">
+            <h1
+            className="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200">
+              <span className="text-accent dark:text-white highlight">Travel Quiz</span></h1>
+            </div>
+            <div className={`${activeQuiz ? 'quiz-wrapper' : ''}`}>
+              { <RenderAnsweredQuestions />}
+              { <RenderActiveQuestions />}
+            </div>
+              {!activeQuiz &&
+                <div className="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
+                  <div className="flex w-full sm:w-auto"> 
+                    <a className="btn-primary w-full sm:mb-0"  onClick={() => setActiveQuiz(true)}>Start travel quiz</a>
+                  </div>
+                </div>
+              }
+        </div>
+      </div>
     )
 
 }

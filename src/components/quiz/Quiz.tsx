@@ -124,7 +124,7 @@ const RQuiz = (props: Props) => {
         
           </div>  
         </>) :
-        ( activeQuiz && <div className="mt-4 mb-8 md:mx-auto md:mb-12 text-center max-w-3xl">
+        ( activeQuiz && <div className="mt-4 md:mx-auto md:mb-12 text-center max-w-3xl">
           <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2 md:mx-auto md:mb-2 text-center max-w-3xl">{content?.quizFinishedTitle}</h2>
           {content?.quizFinishedText && <PortableText value={content?.quizFinishedText} />}
           {props.children}
@@ -157,13 +157,18 @@ const RQuiz = (props: Props) => {
     useEffect(() => {
       setActiveQuestion(findActiveQuestion(1))
     }, [questions])
+
+    const handleCloseQuiz = () => {
+      setAnsweredQuestions([])
+      setActiveQuestion(findActiveQuestion(1))
+      setActiveQuiz(false) 
+    }
     
 
-    // const [saving, setSaving] = useState(false)
     return (
       <div className={`${activeQuiz ? 'active' : ''}`}>
         {activeQuiz && 
-        <div className="close-icon" onClick={() => setActiveQuiz(false)}></div>}
+        <div className="close-icon" onClick={handleCloseQuiz}></div>}
         <div id={quizId} ref={activeQuestionsRef} className={'relative px-4 md:px-6 py-7 md:py-16 lg:py-20 text-default mx-auto max-w-6xl'}>
           <div className="text-center pb-4 md:pb-0 max-w-5xl mx-auto">
             <h1
@@ -175,7 +180,7 @@ const RQuiz = (props: Props) => {
               { <RenderActiveQuestions />}
             </div>
               {!activeQuiz &&
-                <div className="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
+                <div className="max-w-xs pt-4 sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
                   <div className="flex w-full sm:w-auto"> 
                     <a className="btn-primary w-full sm:mb-0"  onClick={() => setActiveQuiz(true)}>Start travel quiz</a>
                   </div>

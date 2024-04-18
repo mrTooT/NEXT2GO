@@ -101,7 +101,7 @@ const getMetadata = () => {
       default: siteConfig?.name || DEFAULT_SITE_NAME,
       template: '%s',
     },
-    description: '',
+    description: 'Dit is de meta  description',
     robots: {
       index: false,
       follow: false,

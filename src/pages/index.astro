@@ -26,8 +26,13 @@ interface HomepageData {
 
 }
 
+export interface Props {
+  metadata?: MetaDataType;
+}
+
 const metadata = {
-  title: 'NEXT2GO — Free template for creating websites with Astro + Tailwind CSS',
+  title: `${data.metaTitle}`,
+  description: `${data.metaDesciption}`,
   ignoreTitleTemplate: true,
 };
 
@@ -176,6 +181,7 @@ homePageData.map(d => data = d)
 
   <!-- HighlightedPosts Widget ******* -->
 
+  <div id="blog"></div>
   <BlogLatestPosts
     title=`${data.blogTitle}`
     information={`${data.blogSubTitle}`}

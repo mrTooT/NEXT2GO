@@ -11,8 +11,8 @@ export const headerData = {
       href: getPermalink('/#testimonials'),
     },
     {
-      text: 'Personal favourites',
-      href: getPermalink('/#favourites'),
+      text: 'Blog',
+      href: getPermalink('/#blof'),
     },
   ],
   secondaryLinks: [

@@ -16,6 +16,18 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'metaTitle',
+      title: 'meta Title',
+      type: 'string',
+      description: ''
+    }),
+    defineField({
+      name: 'metaDescription',
+      title: 'Meta description',
+      type: 'string',
+      description: '',
+    }),
+    defineField({
       name: 'title',
       title: 'title',
       type: 'string',

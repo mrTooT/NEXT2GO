@@ -61,34 +61,34 @@ homePageData.map(d => data = d)
 
   <Stats
     stats={[
-      { title: 'Years of experience', amount: '10' },
-      { title: 'Averige rating', amount: '4.5' },
-      { title: 'Lik(e) me', amount: '100' },
-      { title: 'Hamster', amount: '1' },
+      { title: data.proof1title, amount: data.proof1amount},
+      { title: data.proof2title, amount: data.proof2amount },
+      { title: data.proof3title, amount: data.proof3amount },
+      { title: data.proof4title, amount: data.proof4amount},
     ]}
   />
 
 
   <Features
   id="features"
-  tagline="NEXT2GO process"
-  title="The journey to your next destination"
+  tagline=`${data.stepsTitle}`
+  title=`${data.stepsSubTitle}`
   columns={4}
   items={[
     {
-      title: 'Quiz',
+      title: `${data.step1text}`,
       icon: 'tabler:number-1',
     },
     {
-      title: 'Curated advice',
+      title: `${data.step2text}`,
       icon: 'tabler:number-2',
     },
     {
-      title: '1 on 1 contact',
+      title: `${data.step3text}`,
       icon: 'tabler:number-3',
     },
     {
-      title: 'Book',
+      title: `${data.step4text}`,
       icon: 'tabler:number-4',
     },
   ]}
@@ -177,8 +177,7 @@ homePageData.map(d => data = d)
   <!-- HighlightedPosts Widget ******* -->
 
   <BlogLatestPosts
-    title="Hier een pakkende titel voor de/het blog"
-    information={`Hier een mega interessante introductie tekst voor de/het blog
-                `}
+    title=`${data.blogTitle}`
+    information={`${data.blogSubTitle}`}
   />
 </Layout>

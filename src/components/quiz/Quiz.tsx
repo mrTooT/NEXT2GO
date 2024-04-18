@@ -30,7 +30,6 @@ const RQuiz = (props: Props) => {
   const [questions, setQuestions] = useState<Question[] >([]);
   const [content, setContent] = useState<Content>();
   const [answeredQuestions, setAnsweredQuestions] = useState<Question[]>([]);
-  const [animateIndex, setAnimateIndex] = useState<number | null>(null);
   const activeQuestionsRef = React.createRef();
   const answeredQuestionsRef = React.createRef();
   
@@ -88,14 +87,14 @@ const RQuiz = (props: Props) => {
             question.selectedAnswer && <div className="answered-questions question cursor-pointer" key={question.id} onClick={() =>  setActiveQuestion(findActiveQuestion(question.id))}>
               <img
                 src={urlFor(question.selectedAnswer.image).width(450).url()}
-                className="rounded-full shadow-lg w-20 h-20 md:w-40 md:h-40"
+                className="rounded-full shadow-lg w-16 h-16 md:w-24 md:h-24"
                 width={400}
                 sizes="(max-width: 900px) 400px, 900px"
                 alt={question.selectedAnswer.answer}
                 loading="lazy"
                 decoding="async"
               />
-              <h3 className="mb-2 text-xl font-bold leading-tight sm:text-2xl font-heading">
+              <h3 className="answered-question-text mb-2 text-l font-bold leading-tight sm:text-xl font-heading">
                 {question.selectedAnswer.answer}  
               </h3>
             </div>
@@ -110,11 +109,11 @@ const RQuiz = (props: Props) => {
           <div className="flex md:items-center justify-between mb-8 flex-col md:flex-row">
               {activeQuestion.question && (
               <div className="md:max-w-sm">
-                  <h2 className="text-4xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2">{activeQuestion.question}</h2>
+                  <h2 className="text-3xl font-bold tracking-tight sm:text-2xl sm:leading-none group font-heading mb-2">{activeQuestion.question}</h2>
               </div>
               )}
 
-              {activeQuestion.description && <h3 className="text-muted sm:text-m dark:text-slate-400 lg:text-2xl lg:max-w-md">{activeQuestion.description}</h3>}
+              {activeQuestion.description && <h3 className="text-muted sm:text-m dark:text-slate-400 lg:text-l lg:max-w-md">{activeQuestion.description}</h3>}
           </div>
           <div className="grid lg:gap-6 lg:row-gap-5 grid-cols-2 lg:grid-cols-4 -mb-6">
               {activeQuestion.answers.map((answer, index) => 
@@ -133,25 +132,26 @@ const RQuiz = (props: Props) => {
     }
 
     const onAnswerClick = (clickedQuestion: Question, clickedAnswer: Answer) => {
-      setActiveQuiz(true)
-      clickedQuestion.selectedAnswer = clickedAnswer;
-
-      // Check if the state already contains an item with the same id
-      const existingAnswerIndex = answeredQuestions.findIndex(answer => answer.id === clickedQuestion.id);
-
-      if (existingAnswerIndex !== -1) {
-        // If the id already exists, update the existing item
-        const updatedAnsweredQuestions = [...answeredQuestions];
-        updatedAnsweredQuestions[existingAnswerIndex] = clickedQuestion;
-        setAnsweredQuestions(updatedAnsweredQuestions);
-      } else {
-        // If the id doesn't exist, add the clickedAnswer to the state array
-        setAnsweredQuestions(prevAnswers => [...prevAnswers, clickedQuestion]);
-      }
-      
-      setAnimateIndex(clickedAnswer.id)
-      setActiveQuestion(findActiveQuestion(activeQuestion.id + 1));
-      scrollIntoView();
+      window.setTimeout(() => {
+        setActiveQuiz(true)
+        clickedQuestion.selectedAnswer = clickedAnswer;
+  
+        // Check if the state already contains an item with the same id
+        const existingAnswerIndex = answeredQuestions.findIndex(answer => answer.id === clickedQuestion.id);
+  
+        if (existingAnswerIndex !== -1) {
+          // If the id already exists, update the existing item
+          const updatedAnsweredQuestions = [...answeredQuestions];
+          updatedAnsweredQuestions[existingAnswerIndex] = clickedQuestion;
+          setAnsweredQuestions(updatedAnsweredQuestions);
+        } else {
+          // If the id doesn't exist, add the clickedAnswer to the state array
+          setAnsweredQuestions(prevAnswers => [...prevAnswers, clickedQuestion]);
+        }
+        
+        setActiveQuestion(findActiveQuestion(activeQuestion.id + 1));
+        scrollIntoView();
+      }, 300)
     }
 
     useEffect(() => {
@@ -165,9 +165,9 @@ const RQuiz = (props: Props) => {
         {activeQuiz && 
         <div className="close-icon" onClick={() => setActiveQuiz(false)}></div>}
         <div id={quizId} ref={activeQuestionsRef} className={'relative px-4 md:px-6 py-12 md:py-16 lg:py-20 text-default mx-auto max-w-6xl'}>
-          <div className="text-center pb-4 md:pb-6 max-w-5xl mx-auto">
+          <div className="text-center pb-4 md:pb-0 max-w-5xl mx-auto">
             <h1
-            className="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200">
+            className="text-3xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200">
               <span className="text-accent dark:text-white highlight">Travel Quiz</span></h1>
             </div>
             <div className={`${activeQuiz ? 'quiz-wrapper' : ''}`}>

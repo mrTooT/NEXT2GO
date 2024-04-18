@@ -30,16 +30,17 @@ export interface Props {
   metadata?: MetaDataType;
 }
 
+const homePageData = await sanityClient.fetch(`*[_type == "home"]`);
+let data: HomepageData | null = null;
+
+homePageData.map(d => data = d)
+
 const metadata = {
   title: `${data.metaTitle}`,
   description: `${data.metaDesciption}`,
   ignoreTitleTemplate: true,
 };
 
-const homePageData = await sanityClient.fetch(`*[_type == "home"]`);
-let data: HomepageData | null = null;
-
-homePageData.map(d => data = d)
 
 ---
 

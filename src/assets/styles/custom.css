@@ -9,6 +9,10 @@
     overflow-y: auto;
 }
 
+.dark .active {
+  background: rgb(3 6 32);
+}
+
 .answered-questions {
     display: flex;
     flex-direction: row-reverse;
@@ -122,23 +126,29 @@
     width: 32px;
     height: 32px;
     opacity: 0.3;
-  }
-  .close-icon:hover {
-    opacity: 1;
-  }
-  .close-icon:before, .close-icon:after {
-    position: absolute;
-    left: 15px;
-    content:  " ";
-    height: 33px;
-    width: 2px;
-    background-color: #333;
-    cursor: pointer;
+    z-index: 99999;
   }
 
-  .close-icon:before {
-    transform: rotate(45deg);
-  }
-  .close-icon:after {
-    transform: rotate(-45deg);
-  }
+.close-icon:hover {
+  opacity: 1;
+}
+.close-icon:before, .close-icon:after {
+  position: absolute;
+  left: 15px;
+  content:  " ";
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+  cursor: pointer;
+}
+
+.dark .close-icon:before, .dark .close-icon:after {
+  background-color: #ffffff;
+}
+
+.close-icon:before {
+  transform: rotate(45deg);
+}
+.close-icon:after {
+  transform: rotate(-45deg);
+}

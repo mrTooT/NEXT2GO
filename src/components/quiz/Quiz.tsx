@@ -106,7 +106,7 @@ const RQuiz = (props: Props) => {
     const RenderActiveQuestions = () => {
         return activeQuestion ? (
           <>
-          <div className="flex md:items-center justify-between mb-8 flex-col md:flex-row">
+          <div className="flex md:items-center justify-between mb-4 md:mb-8 flex-col md:flex-row">
               {activeQuestion.question && (
               <div className="md:max-w-sm">
                   <h2 className="text-3xl font-bold tracking-tight sm:text-2xl sm:leading-none group font-heading mb-2">{activeQuestion.question}</h2>
@@ -164,7 +164,7 @@ const RQuiz = (props: Props) => {
       <div className={`${activeQuiz ? 'active' : ''}`}>
         {activeQuiz && 
         <div className="close-icon" onClick={() => setActiveQuiz(false)}></div>}
-        <div id={quizId} ref={activeQuestionsRef} className={'relative px-4 md:px-6 py-12 md:py-16 lg:py-20 text-default mx-auto max-w-6xl'}>
+        <div id={quizId} ref={activeQuestionsRef} className={'relative px-4 md:px-6 py-7 md:py-16 lg:py-20 text-default mx-auto max-w-6xl'}>
           <div className="text-center pb-4 md:pb-0 max-w-5xl mx-auto">
             <h1
             className="text-3xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200">

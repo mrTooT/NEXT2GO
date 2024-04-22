@@ -4,7 +4,6 @@ export const setQuizAnswer = (quiz) => {
   if (quizElement) {
     quizElement.addEventListener("answer-click", (e: CustomEvent) => {
       const clickedAnswer = e.detail; 
-      console.log(e.detail)
       quiz.questions.map(question => {
         question.answers.map(answer => {
           if (answer.id === clickedAnswer) {

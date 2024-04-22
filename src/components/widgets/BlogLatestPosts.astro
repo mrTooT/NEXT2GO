@@ -34,9 +34,6 @@ const {
 const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
 
 const blogData = await sanityClient.fetch(`*[_type == "blog"]`);
-
-console.log('blogData: ', blogData)
-console.log('posts: ', posts)
 ---
 
 {

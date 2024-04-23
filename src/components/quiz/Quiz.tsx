@@ -44,7 +44,6 @@ const RQuiz = (props: Props) => {
     }`
       )
       .then((data) => {
-        generateQuestions(data);
         setQuestions(data);
       })
       .catch(console.error);
@@ -61,10 +60,6 @@ const RQuiz = (props: Props) => {
       })
       .catch(console.error);
   }, []);
-
-  const generateQuestions = (data) => {
-    console.log('questions data: ', data);
-  };
 
   const findActiveQuestion: Question | undefined = (activeQuestionId) => {
     return questions.find((question) => question.id === activeQuestionId);

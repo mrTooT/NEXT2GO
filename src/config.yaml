@@ -1,5 +1,5 @@
 site:
-  name: NEXXTTRIP
+  name: Tip my Travel
   site: 'https://astrowind.vercel.app'
   base: '/'
   trailingSlash: false
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: NEXXTTRIP
-    template: '%s — NEXXTTRIP'
+    default: Tip my Travel
+    template: '%s — Tip my Travel'
   description: "\U0001F680 Your personal travel planner. No more stress about the search for you next destination"
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: NEXXTTRIP
+    site_name: Tip my Travel
     images:
       - url: '~/assets/images/default.png'
         width: 1200

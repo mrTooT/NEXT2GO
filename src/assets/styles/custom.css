@@ -9,6 +9,12 @@
   overflow-y: auto;
 }
 
+.background-image {
+  background-size: contain;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Gokyo_Lake_system.jpg/2561px-Gokyo_Lake_system.jpg?20200829110359');
+  color: #ffffff;
+}
+
 .dark .active {
   background: rgb(3 6 32);
 }
@@ -20,8 +26,12 @@
   flex-wrap: nowrap;
   align-items: flex-start;
   transition: justify-content 3s ease-out;
-  justify-content: normal;
+  justify-content: flex-end;
   margin-bottom: 0.5rem;
+
+  @media only screen and (max-width: 600px) {
+    flex-wrap: wrap;
+  }
 }
 
 .answered-questions.finished {

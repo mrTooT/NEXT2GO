@@ -5,14 +5,11 @@ import Hero from '~/components/widgets/Hero.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import RQuiz from '~/components/quiz/Quiz.tsx';
 import Features from '~/components/widgets/Features.astro';
-import {quizData} from '~/utils/quiz';
-import { sanityClient } from "sanity:client";
-import Steps from '~/components/widgets/Steps.astro';
+import { quizData } from '~/utils/quiz';
+import { sanityClient } from 'sanity:client';
 import BlogLatestPosts from '../components/widgets/BlogLatestPosts.astro';
-import { CollapseMenu } from 'sanity';
 import Stats from '~/components/widgets/Stats.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
-
 
 interface HomepageData {
   title?: string;
@@ -23,7 +20,6 @@ interface HomepageData {
   tagline?: any;
   testimonial?: any;
   blogs?: any;
-
 }
 
 export interface Props {
@@ -33,103 +29,100 @@ export interface Props {
 const homePageData = await sanityClient.fetch(`*[_type == "home"]`);
 let data: HomepageData | null = null;
 
-homePageData.map(d => data = d)
+homePageData.map((d) => (data = d));
 
 const metadata = {
   title: `${data.metaTitle}`,
   description: `${data.metaDescription}`,
   ignoreTitleTemplate: true,
 };
-
-
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <Hero
-    actions={[
-      { text: data.buttonText, href: '#quiz' },
-    ]}
-  >
+  <Hero actions={[{ text: data.buttonText, href: '#quiz' }]}>
     <Fragment slot="title">
-      <span set:html={data.title} class="text-accent dark:text-white highlight"></span><br>
-      <span set:html={data.subTitle}></span>
+      <span set:html={data.title} class="text-accent dark:text-white highlight" /><br />
+      <span set:html={data.subTitle} />
     </Fragment>
 
-    <Fragment set:html={data.teaser} slot="subtitle">
-      
-    </Fragment>
+    <Fragment set:html={data.teaser} slot="subtitle" />
 
-    <Fragment set:html={data.tagline} slot="content"></Fragment>
+    <Fragment set:html={data.tagline} slot="content" />
   </Hero>
-
 
   <Stats
     stats={[
-      { title: data.proof1title, amount: data.proof1amount},
+      { title: data.proof1title, amount: data.proof1amount },
       { title: data.proof2title, amount: data.proof2amount },
       { title: data.proof3title, amount: data.proof3amount },
-      { title: data.proof4title, amount: data.proof4amount},
+      { title: data.proof4title, amount: data.proof4amount },
     ]}
   />
 
-
   <Features
-  id="features"
-  tagline=`${data.stepsTitle}`
-  title=`${data.stepsSubTitle}`
-  columns={4}
-  items={[
-    {
-      title: `${data.step1text}`,
-      icon: 'tabler:number-1',
-    },
-    {
-      title: `${data.step2text}`,
-      icon: 'tabler:number-2',
-    },
-    {
-      title: `${data.step3text}`,
-      icon: 'tabler:number-3',
-    },
-    {
-      title: `${data.step4text}`,
-      icon: 'tabler:number-4',
-    },
-  ]}
-/>
+    id="features"
+    tagline=`${data.stepsTitle}`
+    title=`${data.stepsSubTitle}`
+    columns={4}
+    items={[
+      {
+        title: `${data.step1text}`,
+        icon: 'tabler:number-1',
+      },
+      {
+        title: `${data.step2text}`,
+        icon: 'tabler:number-2',
+      },
+      {
+        title: `${data.step3text}`,
+        icon: 'tabler:number-3',
+      },
+      {
+        title: `${data.step4text}`,
+        icon: 'tabler:number-4',
+      },
+    ]}
+  />
 
   <div id="quiz" class="mb-8 border-t border-gray-200 dark:border-slate-800">
     <RQuiz client:load quiz={quizData}>
       <ContactUs
-      title="Drop us a message today!"
-      subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-      inputs={[
-        {
-          type: 'text',
-          name: 'name',
-          label: 'Name',
-        },
-        {
-          type: 'email',
-          name: 'email',
-          label: 'Email',
-        },
-      ]}
-      textarea={{
-        label: 'Message',
-      }}
-      disclaimer={{
-        label:
-          'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-      }}
-      description="Our support team typically responds within 24 business hours."
+        title="Drop us a message today!"
+        subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+        inputs={[
+          {
+            type: 'text',
+            name: 'name',
+            label: 'Name',
+          },
+          {
+            type: 'email',
+            name: 'email',
+            label: 'Email',
+          },
+
+          {
+            type: 'tel',
+            name: 'phone',
+            label: 'Phone number',
+          },
+        ]}
+        textarea={{
+          label: 'Message',
+        }}
+        disclaimer={{
+          label:
+            'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+        }}
+        description="Our support team typically responds within 24 business hours."
+      />
     </RQuiz>
   </div>
 
   <Testimonials
-   id="testimonials"
+    id="testimonials"
     title="What people say about us"
     testimonials={data.testimonial}
     callToAction={null}
@@ -178,8 +171,5 @@ const metadata = {
   <!-- HighlightedPosts Widget ******* -->
 
   <div id="blog"></div>
-  <BlogLatestPosts
-    title=`${data.blogTitle}`
-    information={`${data.blogSubTitle}`}
-  />
+  <BlogLatestPosts title=`${data.blogTitle}` information={`${data.blogSubTitle}`} />
 </Layout>

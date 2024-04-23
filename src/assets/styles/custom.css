@@ -1,12 +1,12 @@
 .active {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    background: white;
-    transition: transform 0.5s ease-out;
-    overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background: white;
+  transition: transform 0.5s ease-out;
+  overflow-y: auto;
 }
 
 .dark .active {
@@ -14,29 +14,29 @@
 }
 
 .answered-questions {
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 1rem;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    transition: justify-content 3s ease-out;
-    justify-content: normal;
-    margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  transition: justify-content 3s ease-out;
+  justify-content: normal;
+  margin-bottom: 0.5rem;
 }
 
 .answered-questions.finished {
-    justify-content: center;
+  justify-content: center;
 }
 
 .answered-questions .question {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.answered-questions .question img{
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
+.answered-questions .question img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .answered-questions .answered-question-text {
@@ -48,15 +48,15 @@
 }
 
 .answer-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .answer-inner {
   margin-top: 0;
   opacity: 1;
-  transition: all  0.4s ease-out;
+  transition: all 0.4s ease-out;
 }
 
 .animate-answer {
@@ -73,76 +73,75 @@
   opacity: 0;
 }
 
-
 .answer-image {
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    transition: transform 0.5s ease-out;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.5s ease-out;
 }
 
 .animate-image:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .features-item {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .animate-image .answer-image {
-    animation: slide-in 0.7s both;
-    
+  animation: slide-in 0.7s both;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(0);
   }
-  
-  @keyframes slide-in {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-300px);
-    }
+  100% {
+    transform: translateY(-300px);
   }
-  
+}
 
 .answer-text {
-    max-height: 6rem;
-    flex: 0 0 auto;
-    overflow: hidden;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
+  max-height: 6rem;
+  flex: 0 0 auto;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 .image-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .close-icon {
-    position: absolute;
-    right: 32px;
-    top: 32px;
-    width: 32px;
-    height: 32px;
-    opacity: 0.3;
-    z-index: 99999;
-  }
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  z-index: 99999;
+}
 
 .close-icon:hover {
   opacity: 1;
 }
-.close-icon:before, .close-icon:after {
+.close-icon:before,
+.close-icon:after {
   position: absolute;
   left: 15px;
-  content:  " ";
+  content: ' ';
   height: 33px;
   width: 2px;
   background-color: #333;
   cursor: pointer;
 }
 
-.dark .close-icon:before, .dark .close-icon:after {
+.dark .close-icon:before,
+.dark .close-icon:after {
   background-color: #ffffff;
 }
 

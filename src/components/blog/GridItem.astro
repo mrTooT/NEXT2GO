@@ -6,21 +6,13 @@ import Image from '~/components/common/Image.astro';
 
 import { findImage } from '~/utils/images';
 import { getPermalink } from '~/utils/permalinks';
-import imageUrlBuilder from "@sanity/image-url";
-import { sanityClient } from "sanity:client";
-
 
 export interface Props {
   post: Post;
 }
 
 const { post } = Astro.props;
-const builder = imageUrlBuilder(sanityClient);
-
-const urlFor = (source) => {
-	return builder.image(source);
-}
-const image = (await findImage(post.image));
+const image = await findImage(post.image);
 ---
 
 <article class="mb-6 transition">
@@ -29,7 +21,7 @@ const image = (await findImage(post.image));
       image && (
         <a href={getPermalink(post.permalink, 'post')}>
           <Image
-            src={urlFor(image).width(450).url()}
+            src={image}
             class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
             widths={[400, 900]}
             width={400}

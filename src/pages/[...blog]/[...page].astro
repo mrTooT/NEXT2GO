@@ -5,7 +5,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
 import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
-// import PostTags from "~/components/blog/Tags.astro";
+import { sanityClient } from 'sanity:client';
 
 import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
 
@@ -19,6 +19,11 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
+
+const homePageData = await sanityClient.fetch(`*[_type == "home"]`);
+let data: HomepageData | null = null;
+
+homePageData.map((d) => (data = d));
 
 // const allCategories = await findCategories();
 // const allTags = await findTags();
@@ -37,10 +42,8 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
-    <Headline
-      subtitle="A statically generated blog example with news, tutorials, resources and other interesting content related to AstroWind"
-    >
-      The Blog
+    <Headline subtitle={data.blogSubTitle}>
+      {data.blogTitle}
     </Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />

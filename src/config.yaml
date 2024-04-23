@@ -1,5 +1,5 @@
 site:
-  name: NEXT2GO
+  name: NEXXTTRIP
   site: 'https://astrowind.vercel.app'
   base: '/'
   trailingSlash: false
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: NEXT2GO
-    template: '%s — NEXT2GO'
+    default: NEXXTTRIP
+    template: '%s — NEXXTTRIP'
   description: "\U0001F680 Your personal travel planner. No more stress about the search for you next destination"
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: NEXT2GO
+    site_name: NEXXTTRIP
     images:
       - url: '~/assets/images/default.png'
         width: 1200

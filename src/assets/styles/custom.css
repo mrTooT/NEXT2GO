@@ -9,10 +9,21 @@
   overflow-y: auto;
 }
 
+.scroll nav {
+  color: var(--aw-color-text-default);
+}
+
+.scroll .site-name {
+  color: var(--aw-color-text-default);
+} {
+  color: var(--aw-color-text-default);
+}
+
 .background-image {
   background-size: contain;
-  background: url('https://unsplash.com/photos/man-holding-luggage-photo-_g1WdcKcV3w');
+  background: url('~/assets/images/background.jpg');
   color: #ffffff;
+  background-position: bottom;
 }
 
 .dark .active {

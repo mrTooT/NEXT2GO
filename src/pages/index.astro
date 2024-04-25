@@ -7,6 +7,7 @@ import RQuiz from '~/components/quiz/Quiz.tsx';
 import Features from '~/components/widgets/Features.astro';
 import { quizData } from '~/utils/quiz';
 import { sanityClient } from 'sanity:client';
+import imageUrlBuilder from '@sanity/image-url';
 import BlogLatestPosts from '../components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
@@ -31,17 +32,25 @@ let data: HomepageData | null = null;
 
 homePageData.map((d) => (data = d));
 
+const builder = imageUrlBuilder(sanityClient);
+
+const urlFor = (source) => {
+  return builder.image(source);
+};
+
 const metadata = {
   title: `${data.metaTitle}`,
   description: `${data.metaDescription}`,
   ignoreTitleTemplate: true,
 };
+
+const image = urlFor(data.image).url();
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <Hero actions={[{ text: data.buttonText, href: '#quiz' }]}>
+  <Hero image={image} actions={[{ text: data.buttonText, href: '#quiz' }]}>
     <Fragment slot="title">
       <span set:html={data.title} class="text-accent dark:text-white highlight" /><br />
       <span set:html={data.subTitle} />

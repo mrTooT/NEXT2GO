@@ -103,6 +103,9 @@ const RQuiz = (props: Props) => {
               </div>
             )
         )}
+        <a className="edit-link capitalize hover:underline cursor-pointer" onClick={() => handleCloseQuiz(false)}>
+          edit
+        </a>
       </div>
     );
   };
@@ -113,14 +116,14 @@ const RQuiz = (props: Props) => {
         <div className="flex md:items-center justify-between mb-4 md:mb-8 flex-col md:flex-row">
           {activeQuestion.question && (
             <div className="md:max-w-sm">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-2xl sm:leading-none group font-heading mb-2">
+              <h2 className="text-center text-3xl font-bold tracking-tight sm:text-2xl sm:leading-none group font-heading mb-2">
                 {activeQuestion.question}
               </h2>
             </div>
           )}
 
           {activeQuestion.description && (
-            <h3 className="text-muted sm:text-m dark:text-slate-400 lg:text-l lg:max-w-md">
+            <h3 className="text-center text-muted sm:text-m dark:text-slate-400 lg:text-l lg:max-w-md">
               {activeQuestion.description}
             </h3>
           )}
@@ -195,10 +198,12 @@ const RQuiz = (props: Props) => {
     setActiveQuestion(findActiveQuestion(1));
   }, [questions]);
 
-  const handleCloseQuiz = () => {
+  const handleCloseQuiz = (close = true) => {
     setAnsweredQuestions([]);
     setActiveQuestion(findActiveQuestion(1));
-    setActiveQuiz(false);
+    if (close) {
+      setActiveQuiz(false);
+    }
   };
 
   return (
@@ -211,7 +216,7 @@ const RQuiz = (props: Props) => {
       >
         <div className="text-center pb-4 md:pb-0 max-w-5xl mx-auto">
           <h1 className="text-3xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200">
-            <span className="text-accent dark:text-white highlight">Travel Quiz</span>
+            <span className="text-accent dark:text-white highlight">Your travel wishes</span>
           </h1>
         </div>
         <div className={`${activeQuiz ? 'quiz-wrapper' : ''}`}>

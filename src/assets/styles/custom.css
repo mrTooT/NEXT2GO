@@ -21,7 +21,6 @@
 
 .background-image {
   background-size: contain;
-  background: url('~/assets/images/background.jpg');
   color: #ffffff;
   background-position: bottom;
 }
@@ -38,17 +37,31 @@
   align-items: flex-start;
   transition: justify-content 3s ease-out;
   justify-content: flex-end;
-  margin-bottom: 0.5rem;
+  @media only screen and (min-width: 500px) {
+    margin: 40px 0 30px 0;
+  }
 }
 
 .answered-questions.finished {
-  justify-content: center;
+  justify-content: flex-start;
+  @media only screen and (min-width: 500px) {
+    justify-content: center;
+  }
+}
+
+.answered-questions .edit-link {
+  display: none;
+}
+
+.answered-questions.finished .edit-link {
+  display:block;
 }
 
 .answered-questions .question {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0;
 }
 
 .answered-questions .question img {
@@ -57,11 +70,14 @@
 }
 
 .answered-questions .answered-question-text {
-  width: 7rem;
+  width: 4rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   text-align: center;
+  @media only screen and (min-width: 500px) {
+    width: 7rem;
+  }
 }
 
 .answer-container {

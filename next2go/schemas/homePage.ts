@@ -19,7 +19,7 @@ export default defineType({
       name: 'metaTitle',
       title: 'meta Title',
       type: 'string',
-      description: ''
+      description: '',
     }),
     defineField({
       name: 'metaDescription',
@@ -56,6 +56,15 @@ export default defineType({
       title: 'Button text',
       type: 'string',
       description: 'Button text die linkt naar de quiz',
+    }),
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      description: '',
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: 'proof1amount',
@@ -151,17 +160,20 @@ export default defineType({
       name: 'quizFinishedTitle',
       title: 'Quiz Finished Title',
       type: 'string',
-      description: 'Dit is de titel die de gebruiker te zien krijgt wanneer hij klaar is met de quiz',
+      description:
+        'Dit is de titel die de gebruiker te zien krijgt wanneer hij klaar is met de quiz',
     }),
     defineField({
       name: 'quizFinishedText',
       title: 'Quiz Finished Text',
-      description:'Dit is de tekst die de gebruiker te zien krijgt wanneer hij klaar is met de quiz',
+      description:
+        'Dit is de tekst die de gebruiker te zien krijgt wanneer hij klaar is met de quiz',
       type: 'array',
       of: [
         {
           type: 'block',
-      }]
+        },
+      ],
     }),
     defineField({
       name: 'blogs',
@@ -190,7 +202,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'title'},
-  
+      title: 'title',
     },
-  })
+  },
+})

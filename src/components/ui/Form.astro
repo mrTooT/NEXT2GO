@@ -5,7 +5,56 @@ import Button from '~/components/ui/Button.astro';
 const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props as Form;
 ---
 
-<form>
+<script>
+  const form = document.getElementById('contact');
+  const xhr = new XMLHttpRequest();
+
+  const handleFormSubmission = (event) => {
+    console.log('Sending email.....');
+    // prevent page from reloading
+    event.preventDefault();
+
+    const data = event.target.elements;
+
+    // put into JSON object
+    const formData = {
+      name: data.name.value,
+      phone: data.phone.value,
+      email: data.email.value,
+      message: data.message.value,
+    };
+
+    // Set POST request method to our netlify function
+    xhr.open('POST', '.netlify/functions/contact');
+
+    // Set the request headers
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    // Send the data as JSON to our netlify function
+    xhr.send(JSON.stringify(formData));
+
+    // Handle the response
+    xhr.onload = function () {
+      const response = JSON.parse(xhr.responseText);
+
+      if (xhr.status === 200) {
+        // The request was successful
+        console.log('success');
+      } else {
+        // The request failed
+        console.log('fail');
+      }
+    };
+  };
+
+  const formSubmit = document.getElementById('form-submit');
+
+  // add the submission event listener
+  formSubmit.addEventListener('click', handleFormSubmission, true);
+</script>
+
+<form id="contact" name="contact" method="GET">
+  <input type="hidden" name="form-name" value="contact" />
   {
     inputs &&
       inputs.map(
@@ -23,6 +72,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
                 id={name}
                 autocomplete={autocomplete}
                 placeholder={placeholder}
+                required
                 class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
               />
             </div>
@@ -41,6 +91,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           name="textarea"
           rows={textarea.rows ? textarea.rows : 4}
           placeholder={textarea.placeholder}
+          required
           class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
         />
       </div>
@@ -55,6 +106,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
             id="disclaimer"
             name="disclaimer"
             type="checkbox"
+            required
             class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
           />
         </div>
@@ -70,7 +122,9 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
   {
     button && (
       <div class="mt-10 grid">
-        <Button variant="primary" type="submit">{button}</Button>
+        <button id="form-submit" class="btn-primary" type="submit">
+          {button}
+        </button>
       </div>
     )
   }

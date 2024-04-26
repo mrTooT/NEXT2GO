@@ -123,8 +123,7 @@ const RQuiz = (props: Props) => {
   };
 
   const handleFormSubmit = async (data) => {
-    console.log('apikey: ', import.meta.env.APIKEY);
-    sendgrid.setApiKey(import.meta.env.APIKEY);
+    sendgrid.setApiKey('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');
     sendgrid.send(getEmailTemplate(data));
   };
 

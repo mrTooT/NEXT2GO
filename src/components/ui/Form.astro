@@ -1,139 +1,77 @@
 ---
 import type { Form } from '~/types';
-import Button from '~/components/ui/Button.astro';
 
-const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props as Form;
+const { inputs, textarea, disclaimer, description = '' } = Astro.props as Form;
 ---
 
-<script>
-  const form = document.getElementById('contact');
-  const xhr = new XMLHttpRequest();
+{
+  inputs &&
+    inputs.map(
+      ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
+        name && (
+          <div class="mb-6">
+            {label && (
+              <label for={name} class="block text-sm font-medium">
+                {label}
+              </label>
+            )}
+            <input
+              type={type}
+              name={name}
+              id={name}
+              autocomplete={autocomplete}
+              placeholder={placeholder}
+              required
+              class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+            />
+          </div>
+        )
+    )
+}
 
-  const handleFormSubmission = (event) => {
-    console.log('Sending email.....');
-    // prevent page from reloading
-    event.preventDefault();
+{
+  textarea && (
+    <div>
+      <label for="textarea" class="block text-sm font-medium">
+        {textarea.label}
+      </label>
+      <textarea
+        id="textarea"
+        name="textarea"
+        rows={textarea.rows ? textarea.rows : 4}
+        placeholder={textarea.placeholder}
+        required
+        class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+      />
+    </div>
+  )
+}
 
-    const data = event.target.elements;
-
-    // put into JSON object
-    const formData = {
-      name: data.name.value,
-      phone: data.phone.value,
-      email: data.email.value,
-      message: data.message.value,
-    };
-
-    // Set POST request method to our netlify function
-    xhr.open('POST', '.netlify/functions/contact');
-
-    // Set the request headers
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
-    // Send the data as JSON to our netlify function
-    xhr.send(JSON.stringify(formData));
-
-    // Handle the response
-    xhr.onload = function () {
-      const response = JSON.parse(xhr.responseText);
-
-      if (xhr.status === 200) {
-        // The request was successful
-        console.log('success');
-      } else {
-        // The request failed
-        console.log('fail');
-      }
-    };
-  };
-
-  const formSubmit = document.getElementById('form-submit');
-
-  // add the submission event listener
-  formSubmit.addEventListener('click', handleFormSubmission, true);
-</script>
-
-<form id="contact" name="contact" method="GET">
-  <input type="hidden" name="form-name" value="contact" />
-  {
-    inputs &&
-      inputs.map(
-        ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
-          name && (
-            <div class="mb-6">
-              {label && (
-                <label for={name} class="block text-sm font-medium">
-                  {label}
-                </label>
-              )}
-              <input
-                type={type}
-                name={name}
-                id={name}
-                autocomplete={autocomplete}
-                placeholder={placeholder}
-                required
-                class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-              />
-            </div>
-          )
-      )
-  }
-
-  {
-    textarea && (
-      <div>
-        <label for="textarea" class="block text-sm font-medium">
-          {textarea.label}
-        </label>
-        <textarea
-          id="textarea"
-          name="textarea"
-          rows={textarea.rows ? textarea.rows : 4}
-          placeholder={textarea.placeholder}
+{
+  disclaimer && (
+    <div class="mt-3 flex items-start">
+      <div class="flex mt-0.5">
+        <input
+          id="disclaimer"
+          name="disclaimer"
+          type="checkbox"
           required
-          class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+          class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
         />
       </div>
-    )
-  }
-
-  {
-    disclaimer && (
-      <div class="mt-3 flex items-start">
-        <div class="flex mt-0.5">
-          <input
-            id="disclaimer"
-            name="disclaimer"
-            type="checkbox"
-            required
-            class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-          />
-        </div>
-        <div class="ml-3">
-          <label for="disclaimer" class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-400">
-            {disclaimer.label}
-          </label>
-        </div>
+      <div class="ml-3">
+        <label for="disclaimer" class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-400">
+          {disclaimer.label}
+        </label>
       </div>
-    )
-  }
+    </div>
+  )
+}
 
-  {
-    button && (
-      <div class="mt-10 grid">
-        <button id="form-submit" class="btn-primary" type="submit">
-          {button}
-        </button>
-      </div>
-    )
-  }
-
-  {
-    description && (
-      <div class="mt-3 text-center">
-        <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
-      </div>
-    )
-  }
-</form>
+{
+  description && (
+    <div class="mt-3 text-center">
+      <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
+    </div>
+  )
+}

@@ -202,4 +202,3 @@ export const METADATA = getMetadata();
 export const APP_BLOG = getAppBlog();
 export const UI = getUI();
 export const ANALYTICS = getAnalytics();
-export const APIKEY = 'SG.4AkHyPqoS4KD3JXNZIdhfg.oHY2DaD9Ed8L3NNYEoarYdkCA9jaYP8AHYR2jqhfkCs';

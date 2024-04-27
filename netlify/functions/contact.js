@@ -85,5 +85,3 @@ const handler = async function (event) {
 };
 
 export { handler };
-
-('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');

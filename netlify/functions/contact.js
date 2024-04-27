@@ -81,7 +81,7 @@ const handler = async function (event) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ msg: `${err.message} with data: ${JSON.stringify(data)}` }),
+      body: JSON.stringify({ msg: `${err.message} with data: ${JSON.stringify(data)} and apiKey: ${APIKEY}` }),
     };
   }
 };

@@ -60,7 +60,7 @@ const handler = async function (event) {
   console.log('data', data);
 
   // set API key
-  sendgrid.setApiKey(APIKEY);
+  sendgrid.setApiKey(import.meta.env.APIKEY);
 
   try {
     await sendgrid.send(getEmailTemplate(data));

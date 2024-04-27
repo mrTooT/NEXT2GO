@@ -88,6 +88,7 @@ const RQuiz = (props: Props) => {
   }
 
   const handleFormSubmit = (data) => {
+    console.log('answered: ', answeredQuestions);
     data.quizData = answeredQuestions;
     postData('.netlify/functions/contact', data).then((data) => {
       console.log(data); // JSON data parsed by `data.json()` call

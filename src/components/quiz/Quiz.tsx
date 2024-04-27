@@ -89,7 +89,7 @@ const RQuiz = (props: Props) => {
 
   const handleFormSubmit = (data) => {
     console.log('answered: ', answeredQuestions);
-    data.quizData = answeredQuestions;
+    data.quizData = answeredQuestions.map((data) => data.selectedAnswer);
     postData('.netlify/functions/contact', data).then((data) => {
       console.log(data); // JSON data parsed by `data.json()` call
     });
@@ -308,3 +308,5 @@ const RQuiz = (props: Props) => {
 };
 
 export default RQuiz;
+
+('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');

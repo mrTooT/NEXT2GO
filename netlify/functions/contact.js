@@ -79,9 +79,11 @@ const handler = async function (event) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ msg: err.message }),
+      body: JSON.stringify({ msg: `${err.message} with data: ${data}` }),
     };
   }
 };
 
 export { handler };
+
+('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');

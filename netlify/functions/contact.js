@@ -35,6 +35,8 @@ const getEmailTemplate = (data) => {
             <p>${data.phone}</p>
             <p>Message:</p>
             <p>${data.message}</p>
+            <p> Quiz: ingevuld </p>
+            <p>${data.quizData}</p>
             <br>
             </div>
             <img src="https://manuarora.in/logo.png" class="logo-image" style="height: 50px;width: 50px;border-radius: 5px;overflow: hidden;">

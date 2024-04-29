@@ -339,7 +339,7 @@ const RQuiz = (props: Props) => {
           {<RenderActiveQuestions />}
         </div>
         {!activeQuiz && (
-          <div className="sm:mt-0 max-w-xs pt-4 sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
+          <div className="mt-8 max-w-xs pt-4 sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
             <div className="flex w-full sm:w-auto">
               <a className="btn-primary w-full sm:mb-0" onClick={() => setActiveQuiz(true)}>
                 Start travel quiz

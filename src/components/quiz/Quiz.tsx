@@ -103,10 +103,10 @@ const RQuiz = (props: Props) => {
       console.log('env', import.meta.env.REACT_APP_USER_ID);
       console.log('ekenv', import.meta.env.REACT_APP_PUBLIC_KEY);
       await emailjs.send(
-        import.meta.env.REACT_APP_SERVICE_ID,
-        import.meta.env.REACT_APP_TEMPLATE_ID,
+        import.meta.env.PUBLIC_SERVICE_ID,
+        import.meta.env.PUBLIC_TEMPLATE_ID,
         templateParams,
-        import.meta.env.REACT_APP_PUBLIC_KEY
+        import.meta.env.PUBLIC_PUBLIC_KEY
       );
 
       // Display success alert

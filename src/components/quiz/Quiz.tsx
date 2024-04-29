@@ -87,7 +87,7 @@ const RQuiz = (props: Props) => {
 
   async function postData(data = {}) {
     // Destrcture data object
-    const { name, email, phone, message } = data;
+    const { name, email, phone, message, quizData } = data;
     try {
       // Disable form while processing submission
       setDisabled(true);
@@ -97,11 +97,9 @@ const RQuiz = (props: Props) => {
         email,
         phone,
         message,
-        quizData: answeredQuestions.map((questions) => questions.selectedAnswer),
+        quizData,
       };
 
-      console.log('env', import.meta.env.REACT_APP_USER_ID);
-      console.log('ekenv', import.meta.env.REACT_APP_PUBLIC_KEY);
       await emailjs.send(
         import.meta.env.PUBLIC_SERVICE_ID,
         import.meta.env.PUBLIC_TEMPLATE_ID,
@@ -124,11 +122,10 @@ const RQuiz = (props: Props) => {
   }
 
   const handleFormSubmit = (data) => {
-    console.log('answered: ', answeredQuestions);
-    data.quizData = answeredQuestions.map((data) => data.selectedAnswer);
-    postData(data).then((data) => {
-      console.log(data); // JSON data parsed by `data.json()` call
-    });
+    const answers = answeredQuestions.map((questions) => questions.selectedAnswer);
+    const answerText = answers.map((answers) => answers?.answer);
+    data.quizData = answerText.toString();
+    postData(data);
   };
 
   const scrollIntoView = () => {

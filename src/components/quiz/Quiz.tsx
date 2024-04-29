@@ -5,6 +5,7 @@ import { client } from '~/client';
 import imageUrlBuilder from '@sanity/image-url';
 import { PortableText } from '@portabletext/react';
 import { useForm } from 'react-hook-form';
+import emailjs from '@emailjs/browser';
 
 export interface Props {
   title?: string;
@@ -28,12 +29,18 @@ const urlFor = (source) => {
 };
 
 const RQuiz = (props: Props) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [content, setContent] = useState<Content>();
   const [answeredQuestions, setAnsweredQuestions] = useState<Question[]>([]);
+  const [disabled, setDisabled] = useState(false);
   const activeQuestionsRef = React.createRef();
   const answeredQuestionsRef = React.createRef();
+  const [alertInfo, setAlertInfo] = useState({
+    display: false,
+    message: '',
+    type: '',
+  });
 
   useEffect(() => {
     client
@@ -69,28 +76,57 @@ const RQuiz = (props: Props) => {
   const [activeQuestion, setActiveQuestion] = useState<Question>();
   const [activeQuiz, setActiveQuiz] = useState(false);
 
-  async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
+  const toggleAlert = (message, type) => {
+    setAlertInfo({ display: true, message, type });
+
+    // Hide alert after 5 seconds
+    setTimeout(() => {
+      setAlertInfo({ display: false, message: '', type: '' });
+    }, 5000);
+  };
+
+  async function postData(data = {}) {
+    // Destrcture data object
+    const { name, email, phone, message } = data;
+    try {
+      // Disable form while processing submission
+      setDisabled(true);
+
+      const templateParams = {
+        name,
+        email,
+        phone,
+        message,
+        quizData: answeredQuestions.map((questions) => questions.selectedAnswer),
+      };
+
+      console.log('env', import.meta.env.REACT_APP_USER_ID);
+      console.log('ekenv', import.meta.env.REACT_APP_PUBLIC_KEY);
+      await emailjs.send(
+        import.meta.env.REACT_APP_SERVICE_ID,
+        import.meta.env.REACT_APP_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.REACT_APP_PUBLIC_KEY
+      );
+
+      // Display success alert
+      toggleAlert('Form submission was successful!', 'success');
+    } catch (e) {
+      console.error(e);
+      // Display error alert
+      toggleAlert('Uh oh. Something went wrong.', 'danger');
+    } finally {
+      // Re-enable form submission
+      setDisabled(false);
+      // Reset contact form fields after submission
+      reset();
+    }
   }
 
   const handleFormSubmit = (data) => {
     console.log('answered: ', answeredQuestions);
     data.quizData = answeredQuestions.map((data) => data.selectedAnswer);
-    postData('.netlify/functions/contact', data).then((data) => {
+    postData(data).then((data) => {
       console.log(data); // JSON data parsed by `data.json()` call
     });
   };
@@ -212,10 +248,22 @@ const RQuiz = (props: Props) => {
                 />
               </div>
               <div className="mt-10 grid">
-                <button id="form-submit" className="btn-primary" type="submit">
+                <button id="form-submit" className="btn-primary" type="submit" disabled={disabled}>
                   Contact us
                 </button>
               </div>
+              {alertInfo.display && (
+                <div className={`alert alert-${alertInfo.type} alert-dismissible mt-5`} role="alert">
+                  {alertInfo.message}
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                    onClick={() => setAlertInfo({ display: false, message: '', type: '' })} // Clear the alert when close button is clicked
+                  ></button>
+                </div>
+              )}
             </form>
           </div>
         </div>
@@ -308,5 +356,3 @@ const RQuiz = (props: Props) => {
 };
 
 export default RQuiz;
-
-('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');

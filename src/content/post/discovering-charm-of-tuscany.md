@@ -1,7 +1,7 @@
 ---
 publishDate: 2024-02-17T00:00:00Z
-title: Discovering the Charm of Tuscany, An unbelievable holiday by Tip My Travel
-excerpt: Discovering the Charm of Tuscany, An unbelievable holiday by Tip My Travel
+title: Discovering the Charm of Tuscany
+excerpt: An unbelievable holiday by Tip My Travel
 image: https://cdn.sanity.io/images/5eo5uf46/production/05c2a9a9b6eac6179fe707eba1ecd41940870c3c-2880x2160.jpg?w=2000&fit=max&auto=format
 category: Winter
 tags:

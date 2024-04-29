@@ -1,7 +1,7 @@
 ---
 publishDate: 2024-02-17T00:00:00Z
-title: Exploring the American West Coast, A Family Adventure of a Lifetime
-excerpt: Exploring the American West Coast, A Family Adventure of a Lifetime
+title: Exploring the American West Coast
+excerpt: A Family Adventure of a Lifetime
 image: https://cdn.sanity.io/images/5eo5uf46/production/eeb0dbc32513a7ba8dcd7084b09bb089399080f2-5461x3641.jpg?w=2000&fit=max&auto=format
 category: Road trip
 tags:

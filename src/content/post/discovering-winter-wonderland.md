@@ -1,7 +1,7 @@
 ---
 publishDate: 2024-02-17T00:00:00Z
-title: Discovering Winter Wonderland, A Serfaus Ski Adventure
-excerpt: Discovering Winter Wonderland, A Serfaus Ski Adventure
+title: Discovering Winter Wonderland
+excerpt: A Serfaus Ski Adventure
 image: https://cdn.sanity.io/images/5eo5uf46/production/2f38c060057fc468479200f8602cc8c77879f488-4032x3024.jpg
 category: Winter
 tags:

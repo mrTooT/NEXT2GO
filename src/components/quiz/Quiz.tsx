@@ -191,7 +191,7 @@ const RQuiz = (props: Props) => {
   const RenderActiveQuestions = () => {
     return activeQuestion ? (
       <>
-        <div className="flex md:items-center justify-between mb-4 md:mb-8 flex-col md:flex-row">
+        <div className="flex md:items-center justify-between md:mb-8 flex-col md:flex-row">
           {activeQuestion.question && (
             <div className="md:max-w-sm">
               <h2 className="text-center text-3xl font-bold tracking-tight sm:text-2xl sm:leading-none group font-heading mb-2">
@@ -209,7 +209,7 @@ const RQuiz = (props: Props) => {
         <div className="grid lg:gap-6 lg:row-gap-5 grid-cols-2 lg:grid-cols-4 -mb-6">
           {activeQuestion.answers.map((answer, index) => (
             <div
-              className={'lg:mb-6 transition cursor-pointer p-6 md:pt-8 md:pb-8 answer-' + index}
+              className={'lg:mb-6 transition cursor-pointer md:pt-8 md:pb-8 answer-' + index}
               key={answer.id}
               onClick={() => onAnswerClick(activeQuestion, answer)}
             >
@@ -329,7 +329,7 @@ const RQuiz = (props: Props) => {
         ref={activeQuestionsRef}
         className={'relative px-4 md:px-6 py-7 md:py-16 lg:py-20 text-default mx-auto max-w-6xl'}
       >
-        <div className="text-center pb-4 md:pb-0 max-w-5xl mx-auto">
+        <div className="text-center md:pb-0 max-w-5xl mx-auto">
           <h1 className="text-3xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200">
             <span className="text-accent dark:text-white highlight">Your travel wishes</span>
           </h1>
@@ -339,7 +339,7 @@ const RQuiz = (props: Props) => {
           {<RenderActiveQuestions />}
         </div>
         {!activeQuiz && (
-          <div className="max-w-xs pt-4 sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
+          <div className="sm:mt-0 max-w-xs pt-4 sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
             <div className="flex w-full sm:w-auto">
               <a className="btn-primary w-full sm:mb-0" onClick={() => setActiveQuiz(true)}>
                 Start travel quiz

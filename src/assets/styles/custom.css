@@ -44,6 +44,7 @@
 
 .answered-questions.finished {
   justify-content: flex-start;
+  position: relative;
   @media only screen and (min-width: 500px) {
     justify-content: center;
   }
@@ -51,6 +52,9 @@
 
 .answered-questions .edit-link {
   display: none;
+  position: absolute;
+  right: 0px;
+  margin-top: 100px;
 }
 
 .answered-questions.finished .edit-link {

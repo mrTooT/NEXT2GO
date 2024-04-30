@@ -34,6 +34,7 @@ const RQuiz = (props: Props) => {
   const [content, setContent] = useState<Content>();
   const [answeredQuestions, setAnsweredQuestions] = useState<Question[]>([]);
   const [disabled, setDisabled] = useState(false);
+  const [showForm, setShowForm] = useState(true);
   const activeQuestionsRef = React.createRef();
   const answeredQuestionsRef = React.createRef();
   const [alertInfo, setAlertInfo] = useState({
@@ -87,7 +88,7 @@ const RQuiz = (props: Props) => {
 
   async function postData(data = {}) {
     // Destrcture data object
-    const { name, email, phone, message, quizData } = data;
+    const { name, email, phone, message, country, quizData } = data;
     try {
       // Disable form while processing submission
       setDisabled(true);
@@ -97,6 +98,7 @@ const RQuiz = (props: Props) => {
         email,
         phone,
         message,
+        country,
         quizData,
       };
 
@@ -106,7 +108,8 @@ const RQuiz = (props: Props) => {
         templateParams,
         import.meta.env.PUBLIC_PUBLIC_KEY
       );
-
+      // Hide form
+      setShowForm(false);
       // Display success alert
       toggleAlert('Form submission was successful!', 'success');
     } catch (e) {
@@ -136,7 +139,7 @@ const RQuiz = (props: Props) => {
     }
   };
 
-  const renderInput = (name, type, placeholder) => {
+  const renderInput = (name, type, placeholder, required) => {
     return (
       <div className="mb-6">
         <label htmlFor={name} className="block text-sm font-medium"></label>
@@ -146,7 +149,7 @@ const RQuiz = (props: Props) => {
           name={name}
           id={name}
           placeholder={placeholder}
-          required
+          required={required}
           className="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
         />
       </div>
@@ -181,7 +184,10 @@ const RQuiz = (props: Props) => {
               </div>
             )
         )}
-        <a className="edit-link capitalize hover:underline cursor-pointer" onClick={() => handleCloseQuiz(false)}>
+        <a
+          className="text-accent edit-link capitalize hover:underline cursor-pointer"
+          onClick={() => handleCloseQuiz(false)}
+        >
           Edit
         </a>
       </div>
@@ -206,7 +212,7 @@ const RQuiz = (props: Props) => {
             </h3>
           )}
         </div>
-        <div className="grid lg:gap-6 lg:row-gap-5 grid-cols-2 lg:grid-cols-4 -mb-6">
+        <div className="grid mt-4 lg:gap-6 lg:row-gap-5 grid-cols-2 lg:grid-cols-4 -mb-6">
           {activeQuestion.answers.map((answer, index) => (
             <div
               className={'lg:mb-6 transition cursor-pointer md:pt-8 md:pb-8 answer-' + index}
@@ -225,44 +231,47 @@ const RQuiz = (props: Props) => {
             {content?.quizFinishedTitle}
           </h2>
           {content?.quizFinishedText && <PortableText value={content?.quizFinishedText} />}
-          <div className="mt-4 md:mx-auto md:mb-12 text-center max-w-3xl">
-            <form id="contact" name="contact" method="GET" onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
-              <input type="hidden" name="form-name" value="contact" />
-              {renderInput('name', 'name', 'Your name')}
-              {renderInput('email', 'email', 'Your email')}
-              {renderInput('phone', 'phone', 'Your phonenumber')}
-              <div>
-                <label htmlFor="textarea" className="block text-sm font-medium">
-                  Message
-                </label>
-                <textarea
-                  {...register('message')}
-                  id="textarea"
-                  rows={4}
-                  placeholder="Your message"
-                  required
-                  className="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-                />
-              </div>
-              <div className="mt-10 grid">
-                <button id="form-submit" className="btn-primary" type="submit" disabled={disabled}>
-                  Contact us
-                </button>
-              </div>
-              {alertInfo.display && (
-                <div className={`alert alert-${alertInfo.type} alert-dismissible mt-5`} role="alert">
-                  {alertInfo.message}
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close"
-                    onClick={() => setAlertInfo({ display: false, message: '', type: '' })} // Clear the alert when close button is clicked
-                  ></button>
+          {showForm && (
+            <div className="mt-4 md:mx-auto md:mb-12 text-center max-w-3xl">
+              <form id="contact" name="contact" method="GET" onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
+                <input type="hidden" name="form-name" value="contact" />
+                {renderInput('name', 'text', 'Your name', true)}
+                {renderInput('email', 'email', 'Your email', true)}
+                {renderInput('phone', 'phone', 'Your phonenumber', false)}
+                {renderInput('country', 'text', 'Which country are you travelling from', false)}
+                <div>
+                  <label htmlFor="textarea" className="block text-sm font-medium">
+                    Message
+                  </label>
+                  <textarea
+                    {...register('message')}
+                    id="textarea"
+                    rows={4}
+                    placeholder="Your message"
+                    required
+                    className="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                  />
                 </div>
-              )}
-            </form>
-          </div>
+                <div className="mt-10 grid">
+                  <button id="form-submit" className="btn-primary" type="submit" disabled={disabled}>
+                    Contact us
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+          {alertInfo.display && (
+            <div className={`alert alert-${alertInfo.type} alert-dismissible mt-5`} role="alert">
+              {alertInfo.message}
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+                onClick={() => setAlertInfo({ display: false, message: '', type: '' })} // Clear the alert when close button is clicked
+              ></button>
+            </div>
+          )}
         </div>
       )
     );

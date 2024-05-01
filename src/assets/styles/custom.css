@@ -54,6 +54,12 @@
   display: none;
 }
 
+.finished {
+  @media only screen and (max-width: 499px) {
+    overflow: hidden;
+  }
+}
+
 .finished .edit-link-mobile {
   @media only screen and (max-width: 499px) {
     display: flex;

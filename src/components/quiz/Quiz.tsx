@@ -160,36 +160,42 @@ const RQuiz = (props: Props) => {
     if (!answeredQuestions.length) return;
 
     return (
-      <div className={'answered-questions ' + (!activeQuestion ? 'finished' : '')} ref={answeredQuestionsRef}>
-        {answeredQuestions.map(
-          (question: Question) =>
-            question.selectedAnswer && (
-              <div
-                className="answered-questions question cursor-pointer"
-                key={question.id}
-                onClick={() => setActiveQuestion(findActiveQuestion(question.id))}
-              >
-                <img
-                  src={urlFor(question.selectedAnswer.image).width(450).url()}
-                  className="rounded-full shadow-lg w-16 h-16 md:w-24 md:h-24"
-                  width={400}
-                  sizes="(max-width: 900px) 400px, 900px"
-                  alt={question.selectedAnswer.answer}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <h3 className="answered-question-text mb-2 text-l font-bold leading-tight sm:text-xl font-heading">
-                  {question.selectedAnswer.answer}
-                </h3>
-              </div>
-            )
-        )}
-        <a
-          className="text-accent edit-link capitalize hover:underline cursor-pointer"
-          onClick={() => handleCloseQuiz(false)}
-        >
-          Edit
-        </a>
+      <div className={!activeQuestion ? 'finished' : ''}>
+        <div className={'answered-questions'} ref={answeredQuestionsRef}>
+          {answeredQuestions.map(
+            (question: Question) =>
+              question.selectedAnswer && (
+                <div
+                  className="answered-questions question cursor-pointer"
+                  key={question.id}
+                  onClick={() => setActiveQuestion(findActiveQuestion(question.id))}
+                >
+                  <img
+                    src={urlFor(question.selectedAnswer.image).width(450).url()}
+                    className="rounded-full shadow-lg w-16 h-16 md:w-24 md:h-24"
+                    width={400}
+                    sizes="(max-width: 900px) 400px, 900px"
+                    alt={question.selectedAnswer.answer}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <h3 className="answered-question-text mb-2 text-l font-bold leading-tight sm:text-xl font-heading">
+                    {question.selectedAnswer.answer}
+                  </h3>
+                </div>
+              )
+          )}
+          <div className="mt- grid edit-link-desktop">
+            <button className="btn-primary" onClick={() => handleCloseQuiz(false)}>
+              Edit
+            </button>
+          </div>
+        </div>
+        <div className="mt- grid edit-link-mobile">
+          <button className="btn-primary" onClick={() => handleCloseQuiz(false)}>
+            Edit
+          </button>
+        </div>
       </div>
     );
   };
@@ -240,9 +246,6 @@ const RQuiz = (props: Props) => {
                 {renderInput('phone', 'phone', 'Your phonenumber', false)}
                 {renderInput('country', 'text', 'Which country are you travelling from', false)}
                 <div>
-                  <label htmlFor="textarea" className="block text-sm font-medium">
-                    Message
-                  </label>
                   <textarea
                     {...register('message')}
                     id="textarea"
@@ -296,8 +299,10 @@ const RQuiz = (props: Props) => {
       }
 
       if (activeQuestion && activeQuestion.id) {
+        console.log('id: ', clickedAnswer.id);
         switch (clickedAnswer.id) {
           case 'summer':
+          case 'Sunny':
             setActiveQuestion(findActiveQuestion(11));
             break;
           case 'city':

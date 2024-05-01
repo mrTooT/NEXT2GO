@@ -42,7 +42,7 @@
   }
 }
 
-.answered-questions.finished {
+.finished .answered-questions{
   justify-content: flex-start;
   position: relative;
   @media only screen and (min-width: 500px) {
@@ -50,15 +50,21 @@
   }
 }
 
-.answered-questions .edit-link {
+.edit-link-mobile, .edit-link-desktop {
   display: none;
-  position: absolute;
-  right: 0px;
-  margin-top: 100px;
 }
 
-.answered-questions.finished .edit-link {
-  display:block;
+.finished .edit-link-mobile {
+  @media only screen and (max-width: 499px) {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
+
+.finished .edit-link-desktop {
+  @media only screen and (min-width: 500px) {
+    display: block;
+  }
 }
 
 .answered-questions .question {

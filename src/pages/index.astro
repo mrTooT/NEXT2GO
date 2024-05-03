@@ -11,6 +11,7 @@ import imageUrlBuilder from '@sanity/image-url';
 import BlogLatestPosts from '../components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
+import Svgs from '~/components/Svgs.astro';
 
 interface HomepageData {
   title?: string;
@@ -45,10 +46,31 @@ const metadata = {
 };
 
 const image = urlFor(data.image).url();
+const showSvgs = true;
 ---
+
+<script>
+  // Find our component DOM on the page.
+  const buttons = document.querySelectorAll('[data-svg-button]');
+
+  // Add event listeners to fire confetti when a button is clicked.
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      console.log('button clicked');
+      const isShown = document.getElementById('svg-content').style.display === 'block';
+      if (isShown) {
+        return (document.getElementById('svg-content').style.display = 'none');
+      } else {
+        return (document.getElementById('svg-content').style.display = 'block');
+      }
+    });
+  });
+</script>
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
+
+  <button class="btn-primary m-0 svg-button" data-svg-button>Vacation mood on</button>
 
   <Hero image={image} actions={[{ text: data.buttonText, href: '#quiz' }]}>
     <Fragment slot="title">
@@ -136,48 +158,9 @@ const image = urlFor(data.image).url();
     callToAction={null}
   />
 
-  <!-- <Testimonials
-   id="testimonials"
-    title="What people say about us"
-    testimonials={[
-      {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Mick Noya',
-        job: 'Reisspecialist',
-        image: {
-          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
-        },
-      },
-      {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Rik Toetenel',
-        job: 'Levensgenieter',
-        image: {
-          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
-        },
-      },
-      {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Sven Vrolijk',
-        job: 'Dooie mus',
-        image: {
-          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
-        },
-      },
-    ]}
-    callToAction={{
-      target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/onwidget/astrowind',
-      icon: 'tabler:chevron-right',
-    }}
-  /> -->
-
   <!-- HighlightedPosts Widget ******* -->
 
   <div id="blog"></div>
   <BlogLatestPosts title=`${data.blogTitle}` information={`${data.blogSubTitle}`} />
+  <Svgs />
 </Layout>

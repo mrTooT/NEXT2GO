@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .active {
   height: 100%;
   width: 100%;
@@ -202,4 +206,16 @@
 }
 .close-icon:after {
   transform: rotate(-45deg);
+}
+
+.svg-button {
+  display: none;
+  @media only screen and (min-width: 500px) {
+    display: block;
+    z-index: 1000;
+    position: absolute;
+    transform: rotate(90deg);
+    right: -96px;
+    top: 50%;
+  }
 }

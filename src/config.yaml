@@ -1,6 +1,6 @@
 site:
   name: Tip my Travel
-  site: 'https://tipmytravel.com
+  site: 'https://tipmytravel.com'
   base: '/'
   trailingSlash: false
 

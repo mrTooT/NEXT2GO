@@ -1,6 +1,6 @@
 site:
   name: Tip my Travel
-  site: 'https://astrowind.vercel.app'
+  site: 'https://tipmytravel.com
   base: '/'
   trailingSlash: false
 

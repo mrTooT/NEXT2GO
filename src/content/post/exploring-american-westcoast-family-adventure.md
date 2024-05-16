@@ -6,8 +6,7 @@ image: https://cdn.sanity.io/images/5eo5uf46/production/eeb0dbc32513a7ba8dcd7084
 category: Road trip
 tags:
   - camper
-metadata:
-  canonical: https://astrowind.vercel.app/get-started-website-with-astro-tailwind-css
+
 ---
 
 Me, my wife and 2 kids venture along the stunning West Coast of America, where breathtaking landscapes, iconic landmarks, and unforgettable experiences await. Thanks to the expert recommendation from Tip My Travel, our family set out on the ultimate road trip adventure, exploring the diverse wonders of the American landscape from the comfort of our camper.

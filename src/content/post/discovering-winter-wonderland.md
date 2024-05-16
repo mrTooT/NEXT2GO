@@ -6,8 +6,7 @@ image: https://cdn.sanity.io/images/5eo5uf46/production/2f38c060057fc468479200f8
 category: Winter
 tags:
   - wintersport
-metadata:
-  canonical: https://astrowind.vercel.app/get-started-website-with-astro-tailwind-css
+
 ---
 
 Are you ready to carve through pristine powder, soak in breathtaking alpine views, and experience the thrill of winter sports in one of Europe's most picturesque destinations? Look no further than Serfaus, a charming village nestled in the heart of the Austrian Alps. We were with a group of friends looking for our next winter sports destination. The different wishes within the group seemed to be a blocker. We almost gave up but then one of my friends found Tip my Travel, who made it so super easy to make a choice, as all their suggestions were great! Therefore I express gratitude to Tip my Travel for orchestrating an unforgettable getaway for my ski, snowboard and party friends.

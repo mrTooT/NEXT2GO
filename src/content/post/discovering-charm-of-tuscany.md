@@ -6,8 +6,7 @@ image: https://cdn.sanity.io/images/5eo5uf46/production/05c2a9a9b6eac6179fe707eb
 category: Winter
 tags:
   - wintersport
-metadata:
-  canonical: https://astrowind.vercel.app/get-started-website-with-astro-tailwind-css
+
 ---
 
 Nestled in the heart of Italy, Tuscany beckons travellers with its rolling hills, historic cities, and world-renowned cuisine. Our journey to this enchanting region was made possible by the expert recommendation from Tip My Travel, and it proved to be an unforgettable adventure filled with beauty, culture, and personal touches that made all the difference.

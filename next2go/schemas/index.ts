@@ -6,6 +6,7 @@ import person from './person'
 import homePage from './homePage'
 import blog from './blog'
 import testimonial from './testimonial'
+import page from './page'
 
 export const schemaTypes = [
   // Document types
@@ -13,10 +14,11 @@ export const schemaTypes = [
   questionWinter,
   person,
   homePage,
+  page,
 
   // Other types
   blockContent,
   answer,
   blog,
-  testimonial
+  testimonial,
 ]

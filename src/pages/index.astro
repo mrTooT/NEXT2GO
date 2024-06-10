@@ -67,12 +67,12 @@ const showSvgs = true;
   });
 </script>
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} whiteheader={true}>
   <!-- Hero Widget ******************* -->
 
   <button class="btn-primary m-0 svg-button" data-svg-button>Vacation mood on</button>
 
-  <Hero image={image} actions={[{ text: data.buttonText, href: '#quiz' }]}>
+  <Hero whitetext={true} image={image} actions={[{ text: data.buttonText, href: '#quiz' }]}>
     <Fragment slot="title">
       <span set:html={data.title} class="text-accent dark:text-white highlight" /><br />
       <span set:html={data.subTitle} />

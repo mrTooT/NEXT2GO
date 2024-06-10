@@ -1,0 +1,82 @@
+---
+import Hero from '~/components/widgets/Hero.astro';
+import Layout from '~/layouts/PageLayout.astro';
+import Image from '~/components/common/Image.astro';
+import { sanityClient } from 'sanity:client';
+import imageUrlBuilder from '@sanity/image-url';
+import { PortableText } from 'astro-portabletext';
+
+const metadata = {
+  title: 'About us',
+};
+
+const homePageData = await sanityClient.fetch(`*[_type == "page"]`);
+let data: HomepageData | null = null;
+
+homePageData.map((d) => {
+  console.log('d: ', d);
+  if (d.slug?.current === 'inspired') {
+    data = d;
+  }
+});
+
+const builder = imageUrlBuilder(sanityClient);
+
+const urlFor = (source) => {
+  return builder.image(source);
+};
+
+const image = data?.image ? urlFor(data?.image).url() : '';
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline={data.tagline}
+    image={{
+      src: image,
+    }}
+  >
+    <Fragment slot="title">
+      {data.title}
+      <br />
+      <span class="text-accent dark:text-white highlight"> {data.subtitle}</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      {data.title}
+    </Fragment>
+  </Hero>
+
+  <div>
+    <p class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted dark:text-slate-400 text-justify">
+      {data.title}
+    </p>
+
+    {
+      image ? (
+        <Image
+          src={image}
+          class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
+          widths={[400, 900]}
+          sizes="(max-width: 900px) 400px, 900px"
+          width={900}
+          height={506}
+          alt="alt"
+          loading="eager"
+          decoding="async"
+        />
+      ) : (
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+          <div class="border-t dark:border-slate-700" />
+        </div>
+      )
+    }
+    <div
+      class="mx-auto px-6 sm:px-6 max-w-3xl prose prose-lg lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8 prose-headings:scroll-mt-[80px]"
+    >
+      <PortableText value={data.content} />
+    </div>
+  </div>
+</Layout>

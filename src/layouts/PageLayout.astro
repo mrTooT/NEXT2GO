@@ -10,14 +10,15 @@ import type { MetaData } from '~/types';
 
 export interface Props {
   metadata?: MetaData;
+  whiteheader?: boolean;
 }
 
-const { metadata } = Astro.props;
+const { metadata, whiteheader = false } = Astro.props;
 ---
 
 <Layout metadata={metadata}>
   <slot name="header">
-    <Header {...headerData} isSticky showRssFeed showToggleTheme />
+    <Header {...headerData} whiteheader={whiteheader || false} isSticky showRssFeed showToggleTheme />
   </slot>
   <main>
     <slot />

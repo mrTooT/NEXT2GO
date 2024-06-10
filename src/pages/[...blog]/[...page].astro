@@ -20,7 +20,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
-const homePageData = await sanityClient.fetch(`*[_type == "home"]`);
+const homePageData = await sanityClient.fetch(`*[_type == "page"]`);
 let data: HomepageData | null = null;
 
 homePageData.map((d) => (data = d));

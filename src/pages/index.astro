@@ -66,101 +66,102 @@ const showSvgs = true;
     });
   });
 </script>
+<div class="is-home-page">
+  <Layout metadata={metadata} whiteheader={true}>
+    <!-- Hero Widget ******************* -->
 
-<Layout metadata={metadata} whiteheader={true}>
-  <!-- Hero Widget ******************* -->
+    <button class="btn-primary m-0 svg-button" data-svg-button>Vacation mood on</button>
 
-  <button class="btn-primary m-0 svg-button" data-svg-button>Vacation mood on</button>
+    <Hero whitetext={true} image={image} actions={[{ text: data.buttonText, href: '#quiz' }]}>
+      <Fragment slot="title">
+        <span set:html={data.title} class="text-accent dark:text-white highlight" /><br />
+        <span set:html={data.subTitle} />
+      </Fragment>
 
-  <Hero whitetext={true} image={image} actions={[{ text: data.buttonText, href: '#quiz' }]}>
-    <Fragment slot="title">
-      <span set:html={data.title} class="text-accent dark:text-white highlight" /><br />
-      <span set:html={data.subTitle} />
-    </Fragment>
+      <Fragment set:html={data.teaser} slot="subtitle" />
 
-    <Fragment set:html={data.teaser} slot="subtitle" />
+      <Fragment set:html={data.tagline} slot="content" />
+    </Hero>
 
-    <Fragment set:html={data.tagline} slot="content" />
-  </Hero>
+    <Stats
+      stats={[
+        { title: data.proof1title, amount: data.proof1amount },
+        { title: data.proof2title, amount: data.proof2amount },
+        { title: data.proof3title, amount: data.proof3amount },
+      ]}
+    />
 
-  <Stats
-    stats={[
-      { title: data.proof1title, amount: data.proof1amount },
-      { title: data.proof2title, amount: data.proof2amount },
-      { title: data.proof3title, amount: data.proof3amount },
-    ]}
-  />
+    <Features
+      id="features"
+      tagline=`${data.stepsTitle}`
+      title=`${data.stepsSubTitle}`
+      columns={4}
+      items={[
+        {
+          title: `${data.step1text}`,
+          icon: 'tabler:number-1',
+        },
+        {
+          title: `${data.step2text}`,
+          icon: 'tabler:number-2',
+        },
+        {
+          title: `${data.step3text}`,
+          icon: 'tabler:number-3',
+        },
+        {
+          title: `${data.step4text}`,
+          icon: 'tabler:number-4',
+        },
+      ]}
+    />
 
-  <Features
-    id="features"
-    tagline=`${data.stepsTitle}`
-    title=`${data.stepsSubTitle}`
-    columns={4}
-    items={[
-      {
-        title: `${data.step1text}`,
-        icon: 'tabler:number-1',
-      },
-      {
-        title: `${data.step2text}`,
-        icon: 'tabler:number-2',
-      },
-      {
-        title: `${data.step3text}`,
-        icon: 'tabler:number-3',
-      },
-      {
-        title: `${data.step4text}`,
-        icon: 'tabler:number-4',
-      },
-    ]}
-  />
+    <div id="quiz" class="mb-8 border-t border-gray-200 dark:border-slate-800">
+      <RQuiz client:load quiz={quizData}>
+        <ContactUs
+          title="Drop us a message today!"
+          subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+          inputs={[
+            {
+              type: 'text',
+              name: 'name',
+              label: 'Name',
+            },
+            {
+              type: 'email',
+              name: 'email',
+              label: 'Email',
+            },
 
-  <div id="quiz" class="mb-8 border-t border-gray-200 dark:border-slate-800">
-    <RQuiz client:load quiz={quizData}>
-      <ContactUs
-        title="Drop us a message today!"
-        subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-        inputs={[
-          {
-            type: 'text',
-            name: 'name',
-            label: 'Name',
-          },
-          {
-            type: 'email',
-            name: 'email',
-            label: 'Email',
-          },
+            {
+              type: 'tel',
+              name: 'phone',
+              label: 'Phone number',
+            },
+          ]}
+          textarea={{
+            label: 'Message',
+          }}
+          disclaimer={{
+            label:
+              'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+          }}
+          description="Our support team typically responds within 24 business hours."
+        />
+      </RQuiz>
+    </div>
 
-          {
-            type: 'tel',
-            name: 'phone',
-            label: 'Phone number',
-          },
-        ]}
-        textarea={{
-          label: 'Message',
-        }}
-        disclaimer={{
-          label:
-            'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-        }}
-        description="Our support team typically responds within 24 business hours."
-      />
-    </RQuiz>
-  </div>
+    <Testimonials
+      id="testimonials"
+      title="What people say about us"
+      testimonials={data.testimonial}
+      callToAction={null}
+    />
 
-  <Testimonials
-    id="testimonials"
-    title="What people say about us"
-    testimonials={data.testimonial}
-    callToAction={null}
-  />
+    <!-- HighlightedPosts Widget ******* -->
 
-  <!-- HighlightedPosts Widget ******* -->
-
-  <div id="blog"></div>
-  <BlogLatestPosts title=`${data.blogTitle}` information={`${data.blogSubTitle}`} />
-  <Svgs />
-</Layout>
+    <div id="blog"></div>
+    <BlogLatestPosts title=`${data.blogTitle}` information={`${data.blogSubTitle}`} />
+    <Svgs />
+  </Layout>
+</div>

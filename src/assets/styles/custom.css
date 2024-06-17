@@ -219,3 +219,7 @@ body {
     top: 50%;
   }
 }
+
+.is-home-page .site-name {
+  color: #fff;
+}

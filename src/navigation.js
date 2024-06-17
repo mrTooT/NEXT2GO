@@ -14,6 +14,14 @@ export const headerData = {
       text: 'Blog',
       href: getPermalink('/#blog'),
     },
+    {
+      text: 'Why Tip my Travel',
+      href: getPermalink('/why-tip-my-travel'),
+    },
+    {
+      text: 'Get Inspired',
+      href: getPermalink('/get-inspired'),
+    },
   ],
   secondaryLinks: [
     { text: 'Terms', href: getPermalink('/terms') },

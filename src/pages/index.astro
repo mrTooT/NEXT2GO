@@ -56,7 +56,6 @@ const showSvgs = true;
   // Add event listeners to fire confetti when a button is clicked.
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      console.log('button clicked');
       const isShown = document.getElementById('svg-content').style.display === 'block';
       if (isShown) {
         return (document.getElementById('svg-content').style.display = 'none');

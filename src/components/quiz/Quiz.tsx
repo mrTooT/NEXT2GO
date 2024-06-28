@@ -299,7 +299,6 @@ const RQuiz = (props: Props) => {
       }
 
       if (activeQuestion && activeQuestion.id) {
-        console.log('id: ', clickedAnswer.id);
         switch (clickedAnswer.id) {
           case 'summer':
           case 'Sunny':

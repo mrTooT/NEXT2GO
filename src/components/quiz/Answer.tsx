@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import type { Answer } from '~/types';
 import { client } from '~/client';
 import imageUrlBuilder from '@sanity/image-url';

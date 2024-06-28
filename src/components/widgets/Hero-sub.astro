@@ -1,0 +1,66 @@
+---
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
+import type { CallToAction } from '~/types';
+
+export interface Props {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  content?: string;
+  actions?: string | CallToAction[];
+  image?: string | any; // TODO: find HTMLElementProps
+  whitetext?: boolean;
+}
+
+const {
+  image,
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+  content = await Astro.slots.render('content'),
+  actions = await Astro.slots.render('actions'),
+  whitetext = false
+} = Astro.props;
+---
+
+<section class="relative md:-mt-[96px] not-prose background-image" style=`background: url(${image ? image : ''})`>
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+    <div class="pt-8 md:pt-6">
+      <div class="text-center pb-4 md:pb-6 max-w-5xl mx-auto">
+        Subpage
+        {
+          title && (
+            <h1
+              class=`text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading ${whitetext ? 'text-white': 'text-muted'}`
+              set:html={title}
+            />
+          )
+        }
+         {tagline && <p class=`text-base dark:white font-bold tracking-wide uppercase mb-6  ${whitetext ? 'text-white': 'text-secondary'}` set:html={tagline} />}
+        <div class="max-w-3xl mx-auto">
+          {subtitle && <p class=`text-xl  ${whitetext ? 'text-white': 'text-muted'}` set:html={subtitle} />}
+          {
+            actions && (
+              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
+                {Array.isArray(actions) ? (
+                  actions.map((action) => (
+                    <div class="flex w-full sm:w-auto">
+                      <Button variant="primary" {...(action || {})} class="w-full sm:mb-0" />
+                    </div>
+                  ))
+                ) : (
+                  <Fragment set:html={actions} />
+                )}
+              </div>
+            )
+          }
+        </div>
+        {content && <p class=`text-l mb-6 mt-8  ${whitetext ? 'text-white': 'text-muted'}` set:html={content} />}
+      </div>
+    </div>
+  </div>
+</section>

@@ -225,3 +225,7 @@ body {
     color: #fff;
   }
 }
+
+.sub-page p {
+  margin-bottom: 1.5rem;
+}

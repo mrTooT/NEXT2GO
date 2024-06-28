@@ -229,3 +229,7 @@ body {
 .sub-page p {
   margin-bottom: 1.5rem;
 }
+
+.sub-page a {
+  color: var(--aw-color-primary);
+}

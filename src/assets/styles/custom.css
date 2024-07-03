@@ -233,3 +233,7 @@ body {
 .sub-page a {
   color: var(--aw-color-primary);
 }
+
+.sub-page h6 {
+  font-weight: 600;
+}

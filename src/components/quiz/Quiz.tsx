@@ -242,7 +242,7 @@ const RQuiz = (props: Props) => {
               <form id="contact" name="contact" method="GET" onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
                 <input type="hidden" name="form-name" value="contact" />
                 {renderInput('name', 'text', 'Your name', true)}
-                {renderInput('email', 'email', 'Your email', true)}
+                {renderInput('email', 'email', 'Your email', false)}
                 {renderInput('phone', 'phone', 'Your phonenumber', false)}
                 {renderInput('country', 'text', 'Which country are you travelling from', false)}
                 <div>
@@ -250,7 +250,7 @@ const RQuiz = (props: Props) => {
                     {...register('message')}
                     id="textarea"
                     rows={4}
-                    placeholder="Your message"
+                    placeholder="Please share any additional comments to ensure an even better recommendation"
                     required
                     className="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
                   />

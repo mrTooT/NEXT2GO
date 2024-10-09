@@ -38,42 +38,41 @@ const image = data?.image ? urlFor(data?.image).url() : '';
     }}
   >
     <Fragment slot="title">
-      {data?.title}
-      <br />
-      <span class="text-accent dark:text-white highlight"> {data?.subtitle}</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      {data?.introduction}
+      <span set:html={data.title} class="text-accent dark:text-white highlight" />
+      <span set:html={data.subTitle} />
     </Fragment>
   </Hero>
 
-  <div class="relative max-w-3xl sm:px-6 mx-auto sub-page px-4">
-    <p class="text-xl mb-6">
-      {data?.first}
-    </p>
-
-    {
-      image ? (
-        <Image
-          src={image}
-          class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
-          widths={[400, 900]}
-          sizes="(max-width: 900px) 400px, 900px"
-          width={900}
-          height={506}
-          alt="alt"
-          loading="eager"
-          decoding="async"
-        />
-      ) : (
-        <div class="max-w-3xl mx-auto px-4 sm:px-6">
-          <div class="border-t dark:border-slate-700" />
-        </div>
-      )
-    }
-    <div class="text-xl mb-6">
-      <PortableText value={data?.content} />
-    </div>
-  </div>
+  <Fragment slot="subtitle">
+    {data?.introduction}
+  </Fragment>
 </Layout>
+
+<div class="relative max-w-3xl sm:px-6 mx-auto sub-page px-4">
+  <p class="text-xl mb-6">
+    {data?.first}
+  </p>
+
+  {
+    image ? (
+      <Image
+        src={image}
+        class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
+        widths={[400, 900]}
+        sizes="(max-width: 900px) 400px, 900px"
+        width={900}
+        height={506}
+        alt="alt"
+        loading="eager"
+        decoding="async"
+      />
+    ) : (
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
+        <div class="border-t dark:border-slate-700" />
+      </div>
+    )
+  }
+  <div class="text-xl mb-6">
+    <PortableText value={data?.content} />
+  </div>
+</div>

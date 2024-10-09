@@ -38,9 +38,8 @@ const image = data?.image ? urlFor(data?.image).url() : '';
     }}
   >
     <Fragment slot="title">
-      {data?.title}
-      <br />
-      <span class="text-accent dark:text-white highlight"> {data?.subtitle}</span>
+      <span set:html={data?.title} class="text-accent dark:text-white highlight" />
+      <span set:html={data?.subTitle} />
     </Fragment>
 
     <Fragment slot="subtitle">

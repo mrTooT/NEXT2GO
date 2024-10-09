@@ -1,9 +1,12 @@
 ---
 import { SITE } from '~/utils/config';
+import logo from '~/assets/images/logo-no-background.png';
 ---
 
 <span
   class="site-name self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
 >
-  🌴 <span class="ml-4">{SITE?.name}</span>
+  <img class="logo" src={logo.src} />
+
+  <!-- 🌴 <span class="ml-4">{SITE?.name}</span> -->
 </span>

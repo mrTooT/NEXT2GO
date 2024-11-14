@@ -13,10 +13,10 @@
     "lint:eslint": "eslint . --ext .js,.ts,.astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "^5.0.0",
-    "@astrojs/react": "^3.0.9",
-    "@astrojs/rss": "^4.0.1",
-    "@astrojs/sitemap": "^3.0.4",
+    "@astrojs/netlify": "^5.5.4",
+    "@astrojs/react": "^3.6.2",
+    "@astrojs/rss": "^4.0.9",
+    "@astrojs/sitemap": "^3.2.1",
     "@astrolib/analytics": "^0.5.0",
     "@astrolib/seo": "^1.0.0-beta.5",
     "@emailjs/browser": "^4.3.3",
@@ -28,7 +28,7 @@
     "@sanity/vision": "^3.26.1",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
-    "astro": "^4.1.1",
+    "astro": "^4.16.12",
     "astro-icon": "^1.0.2",
     "astro-portabletext": "^0.10.0",
     "limax": "4.1.0",
@@ -42,9 +42,9 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
-    "@astrojs/mdx": "^2.0.3",
-    "@astrojs/partytown": "^2.0.3",
-    "@astrojs/tailwind": "5.1.0",
+    "@astrojs/mdx": "^3.1.9",
+    "@astrojs/partytown": "^2.1.2",
+    "@astrojs/tailwind": "^5.1.2",
     "@iconify-json/flat-color-icons": "^1.1.10",
     "@iconify-json/tabler": "^1.1.103",
     "@tailwindcss/typography": "^0.5.10",

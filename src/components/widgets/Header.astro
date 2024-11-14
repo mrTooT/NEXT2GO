@@ -25,6 +25,7 @@ interface MenuLink extends Link {
 export interface Props {
   id?: string;
   links?: Array<MenuLink>;
+  socialLInks?: Array<Link>;
   actions?: Array<ActionLink>;
   isSticky?: boolean;
   isDark?: boolean;
@@ -39,6 +40,7 @@ const {
   id = 'header',
   links = [],
   actions = [],
+  socialLinks = [],
   isSticky = false,
   isDark = false,
   isFullWidth = false,
@@ -132,19 +134,40 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     >
       <div class="items-center flex justify-between w-full md:w-auto">
         <div class="flex">
+          {
+            socialLinks?.length ? (
+              <ul class="flex mb-4 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0">
+                {socialLinks.map(({ ariaLabel, href, text, icon }) => (
+                  <li>
+                    <a
+                      class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+                      aria-label={ariaLabel}
+                      target="_blank"
+                      href={href}
+                    >
+                      {icon && <Icon name={icon} class="w-5 h-5" />}
+                      <Fragment set:html={text} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              ''
+            )
+          }
           {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />}
+          {
+            actions?.length ? (
+              <span class="ml-4 rtl:ml-0 rtl:mr-4">
+                {actions.map((btnProps) => (
+                  <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
+                ))}
+              </span>
+            ) : (
+              ''
+            )
+          }
         </div>
-        {
-          actions?.length ? (
-            <span class="ml-4 rtl:ml-0 rtl:mr-4">
-              {actions.map((btnProps) => (
-                <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
-              ))}
-            </span>
-          ) : (
-            ''
-          )
-        }
       </div>
     </div>
   </div>

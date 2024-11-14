@@ -136,9 +136,9 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         <div class="flex">
           {
             socialLinks?.length ? (
-              <ul class="flex mb-4 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0">
+              <>
                 {socialLinks.map(({ ariaLabel, href, text, icon }) => (
-                  <li>
+                  <button>
                     <a
                       class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
                       aria-label={ariaLabel}
@@ -148,9 +148,9 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                       {icon && <Icon name={icon} class="w-5 h-5" />}
                       <Fragment set:html={text} />
                     </a>
-                  </li>
+                  </button>
                 ))}
-              </ul>
+              </>
             ) : (
               ''
             )
